@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct VocabItem: Codable, Identifiable {
+struct VocabItem: Codable, Identifiable, Equatable {
     var id: UUID = UUID()
     var word: String
     var pronunciation: String?
     var meaning: String
     var priority: Int
     var state: VocabState
-    var nextReviewDate: Date?
+    var nextReviewDate: Date? // Note: Must be non-nil if state is .learning
     
     enum CodingKeys: String, CodingKey {
         case word
@@ -23,5 +23,10 @@ struct VocabItem: Codable, Identifiable {
         case priority
         case state
         case nextReviewDate
+    }
+    
+    // Only used for allowing Array.index(of:)
+    static func ==(lhs: VocabItem, rhs: VocabItem) -> Bool {
+        return lhs.id == rhs.id
     }
 }

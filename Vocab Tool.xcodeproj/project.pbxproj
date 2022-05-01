@@ -21,6 +21,12 @@
 		D996C675281E507600B82FD8 /* VocabListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D996C674281E507600B82FD8 /* VocabListView.swift */; };
 		D996C678281E588200B82FD8 /* VocabListPreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D996C677281E588200B82FD8 /* VocabListPreviewData.swift */; };
 		D996C67A281E694B00B82FD8 /* VocabItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D996C679281E694B00B82FD8 /* VocabItemView.swift */; };
+		D9E04C98281F120500B7251C /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E04C97281F120500B7251C /* ReviewView.swift */; };
+		D9E04C99281F120500B7251C /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E04C97281F120500B7251C /* ReviewView.swift */; };
+		D9E04C9B281F159300B7251C /* ReviewSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E04C9A281F159300B7251C /* ReviewSession.swift */; };
+		D9E04C9C281F159300B7251C /* ReviewSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E04C9A281F159300B7251C /* ReviewSession.swift */; };
+		D9E04C9F281F1A7F00B7251C /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E04C9E281F1A7F00B7251C /* DateExtensions.swift */; };
+		D9E04CA0281F1A7F00B7251C /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E04C9E281F1A7F00B7251C /* DateExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +45,9 @@
 		D996C674281E507600B82FD8 /* VocabListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabListView.swift; sourceTree = "<group>"; };
 		D996C677281E588200B82FD8 /* VocabListPreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabListPreviewData.swift; sourceTree = "<group>"; };
 		D996C679281E694B00B82FD8 /* VocabItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabItemView.swift; sourceTree = "<group>"; };
+		D9E04C97281F120500B7251C /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
+		D9E04C9A281F159300B7251C /* ReviewSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewSession.swift; sourceTree = "<group>"; };
+		D9E04C9E281F1A7F00B7251C /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +82,7 @@
 		D996C647281E4C6600B82FD8 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				D9E04C9D281F1A7200B7251C /* SystemExtensions */,
 				D996C673281E506A00B82FD8 /* Views */,
 				D996C66C281E4E2B00B82FD8 /* Domain */,
 				D996C648281E4C6600B82FD8 /* Vocab_ToolApp.swift */,
@@ -115,6 +125,7 @@
 				D996C66D281E4E3900B82FD8 /* VocabList.swift */,
 				D996C66F281E4E5D00B82FD8 /* VocabItem.swift */,
 				D996C671281E4EA200B82FD8 /* VocabState.swift */,
+				D9E04C9A281F159300B7251C /* ReviewSession.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -124,6 +135,7 @@
 			children = (
 				D996C674281E507600B82FD8 /* VocabListView.swift */,
 				D996C679281E694B00B82FD8 /* VocabItemView.swift */,
+				D9E04C97281F120500B7251C /* ReviewView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -134,6 +146,14 @@
 				D996C677281E588200B82FD8 /* VocabListPreviewData.swift */,
 			);
 			path = PreviewContent;
+			sourceTree = "<group>";
+		};
+		D9E04C9D281F1A7200B7251C /* SystemExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				D9E04C9E281F1A7F00B7251C /* DateExtensions.swift */,
+			);
+			path = SystemExtensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,9 +254,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9E04C98281F120500B7251C /* ReviewView.swift in Sources */,
 				D996C65E281E4C6800B82FD8 /* Vocab_ToolDocument.swift in Sources */,
+				D9E04C9B281F159300B7251C /* ReviewSession.swift in Sources */,
 				D996C678281E588200B82FD8 /* VocabListPreviewData.swift in Sources */,
 				D996C670281E4E5D00B82FD8 /* VocabItem.swift in Sources */,
+				D9E04C9F281F1A7F00B7251C /* DateExtensions.swift in Sources */,
 				D996C66E281E4E3900B82FD8 /* VocabList.swift in Sources */,
 				D996C672281E4EA200B82FD8 /* VocabState.swift in Sources */,
 				D996C65C281E4C6800B82FD8 /* Vocab_ToolApp.swift in Sources */,
@@ -250,9 +273,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9E04C99281F120500B7251C /* ReviewView.swift in Sources */,
 				D996C65F281E4C6800B82FD8 /* Vocab_ToolDocument.swift in Sources */,
+				D9E04C9C281F159300B7251C /* ReviewSession.swift in Sources */,
 				D996C65D281E4C6800B82FD8 /* Vocab_ToolApp.swift in Sources */,
 				D996C661281E4C6800B82FD8 /* ContentView.swift in Sources */,
+				D9E04CA0281F1A7F00B7251C /* DateExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

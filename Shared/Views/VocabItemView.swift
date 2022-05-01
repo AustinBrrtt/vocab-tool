@@ -13,7 +13,6 @@ struct VocabItemView: View {
     @State var showPronunciation = false
     
     var leftText: String {
-        print(vocabItem.pronunciation == nil)
         if (!showPronunciation || vocabItem.pronunciation == nil) {
             return vocabItem.word
         }

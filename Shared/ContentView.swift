@@ -11,7 +11,17 @@ struct ContentView: View {
     @Binding var document: Vocab_ToolDocument
 
     var body: some View {
-        VocabListView(vocabList: $document.vocabList)
+        NavigationView {
+            ReviewView(vocabList: $document.vocabList)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        NavigationLink("Vocab List") {
+                            VocabListView(vocabList: $document.vocabList)
+                        }
+                    }
+                }
+        }
+        
     }
 }
 
