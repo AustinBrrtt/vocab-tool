@@ -9,31 +9,37 @@ import SwiftUI
 import UniformTypeIdentifiers
 
 extension UTType {
-    static var exampleText: UTType {
-        UTType(importedAs: "com.example.plain-text")
+    static var vocabList: UTType {
+        UTType(exportedAs: "io.austinbarrett.vocab-tool.list")
     }
 }
 
 struct Vocab_ToolDocument: FileDocument {
-    var text: String
+    var vocabList: VocabList
 
-    init(text: String = "Hello, world!") {
-        self.text = text
+    init(list: VocabList = VocabList(items: [VocabItem(word: "iku", meaning: "go", priority: 1, state: .mastered)])) {
+        vocabList = list
     }
 
-    static var readableContentTypes: [UTType] { [.exampleText] }
+    static var readableContentTypes: [UTType] { [.vocabList] }
 
     init(configuration: ReadConfiguration) throws {
-        guard let data = configuration.file.regularFileContents,
-              let string = String(data: data, encoding: .utf8)
-        else {
+        guard let data = configuration.file.regularFileContents else {
             throw CocoaError(.fileReadCorruptFile)
         }
-        text = string
+        
+        do {
+            vocabList = try JSONDecoder().decode(VocabList.self, from: data)
+        } catch {
+            print(error)
+            throw CocoaError(.coderInvalidValue)
+        }
     }
     
     func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
-        let data = text.data(using: .utf8)!
-        return .init(regularFileWithContents: data)
+        guard let value = try? JSONEncoder().encode(vocabList) else {
+            throw CocoaError(.coderInvalidValue)
+        }
+        return .init(regularFileWithContents: value)
     }
 }
