@@ -95,7 +95,9 @@ struct ReviewView: View {
                     .padding(.vertical)
                 if let pronunciation = reviewSession.currentItem.pronunciation {
                     Text(isCompletionPlaceholder || showPronunciation ? pronunciation : "Tap to reveal pronunciation")
-                        .foregroundColor(showPronunciation ? .primary : .secondary)
+                        .foregroundColor(.secondary)
+                        .padding(8)
+                        .overlay(RoundedRectangle(cornerRadius: 5).stroke(Color.secondary))
                         .onTapGesture {
                             showPronunciation = !showPronunciation
                         }
