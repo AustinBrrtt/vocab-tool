@@ -13,7 +13,7 @@ struct ReviewView: View {
     @Binding var toastColor: Color
     @State var reviewSession: ReviewSession
     @State var showPronunciation = false
-    @State var showMeaning = true
+    @State var showMeaning = false
     
     init(document: Binding<Vocab_ToolDocument>, toastMessage: Binding<String>, toastColor: Binding<Color>) {
         self._document = document
