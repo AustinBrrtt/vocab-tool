@@ -51,7 +51,7 @@ extension Date {
     
     func isSameDay(as date: Date) -> Bool {
         noon == date.noon
-    }
+}
     
     func isSameDayOfWeek(as date: Date) -> Bool {
         date.isA(self.dayOfWeek)

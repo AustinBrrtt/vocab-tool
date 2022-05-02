@@ -18,7 +18,7 @@ class ReviewSession {
     var currentItem: VocabItem {
         hasItem
         ? document.vocabList.wrappedValue.items[reviewIndex]
-        : VocabItem(word: "List Complete", meaning: "You have mastered all items in this list", priority: -1, lastBreak: 0, state: .mastered)
+        : VocabItem(word: "Studying Complete", pronunciation: "You have completed your studying for today", meaning: "", priority: -1, lastBreak: 0, state: .mastered)
     }
     
     var hasItem: Bool {
@@ -34,20 +34,21 @@ class ReviewSession {
         // If there are any items with "learning" status that are due, show the one with the earliest due date.
         // Otherwise, if the number of items with "learning" status meets or exceeds the maxLearningCount, show the one with the earliest due date.
         let learningItems = document.vocabList.wrappedValue.items.filter({ item in item.state == .learning }).sorted(by: { a, b in a.nextReviewDate! < b.nextReviewDate! })
-        if learningItems.count > 0, learningItems[0].nextReviewDate! < Date() || learningItems.count >= maxLearningCount, let idx = document.vocabList.wrappedValue.items.firstIndex(of: learningItems[0]) {
+        if learningItems.count > 0, learningItems[0].nextReviewDate! < Date(), let idx = document.vocabList.wrappedValue.items.firstIndex(of: learningItems[0]) {
             reviewIndex = idx
             return
         }
         
-        // There are no items due with "learning" status and there's room for more "learning" items, so select the first item with "untouched" status
-        if let idx = document.vocabList.wrappedValue.items.firstIndex(where: { item in item.state == .untouched }) {
+        // If there's room for more "learning" items, select the first item with "untouched" status
+        if learningItems.count < maxLearningCount, let idx = document.vocabList.wrappedValue.items.firstIndex(where: { item in item.state == .untouched }) {
             reviewIndex = idx
             return
         }
         
         
-        // If none are "untouched", go back to the items with "learning" status and select the one with the earliest due date.
-        if learningItems.count > 0, let idx = document.vocabList.wrappedValue.items.firstIndex(of: learningItems[0]) {
+        // If none are "untouched", go back to the items with "learning" status and select the one with the earliest due date, as long as it is this calendar day
+        // If next item is for a different calendar day, we are done for the day
+        if learningItems.count > 0, learningItems[0].nextReviewDate!.isSameDay(as: Date()), let idx = document.vocabList.wrappedValue.items.firstIndex(of: learningItems[0]) {
             reviewIndex = idx
             return
         }
@@ -63,19 +64,24 @@ class ReviewSession {
     }
     
     func reviewItem(success: Bool) -> Int {
-        var result = 0
-        
         if hasItem {
-            result = success ? nextReviewTime(after: document.vocabList.wrappedValue.items[reviewIndex].lastBreak) : reviewTimes.first!
-            document.vocabList.wrappedValue.items[reviewIndex].lastBreak = result
+            let (nextBreak, date) = nextReviewTime(for: document.vocabList.wrappedValue.items[reviewIndex], success: success)
+            document.vocabList.wrappedValue.items[reviewIndex].lastBreak = nextBreak
             document.vocabList.wrappedValue.items[reviewIndex].state = .learning
-            document.vocabList.wrappedValue.items[reviewIndex].nextReviewDate = Date.now.add(result, .minute)
+            document.vocabList.wrappedValue.items[reviewIndex].nextReviewDate = date
+            return nextBreak
         }
-        return result
+        return 0
     }
     
-    private func nextReviewTime(after prevReviewTime: Int?) -> Int {
-        let prev = prevReviewTime ?? 0
-        return reviewTimes.first(where: { t in t > prev }) ?? reviewTimes.last!
+    private func nextReviewTime(for item: VocabItem, success: Bool) -> (Int, Date) {
+        // On failure, even if not due yet, jump back to beginning and review soon
+        if !success {
+            return (reviewTimes.first!, Date().add(reviewTimes.first!, .minute))
+        }
+        
+        // On success, advance to the next time slot
+        let result = reviewTimes.first(where: { t in t > item.lastBreak }) ?? reviewTimes.last!
+        return (result, Date().add(result, .minute))
     }
 }

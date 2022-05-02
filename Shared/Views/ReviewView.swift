@@ -14,6 +14,11 @@ struct ReviewView: View {
     @State var reviewSession: ReviewSession
     @State var showPronunciation = false
     @State var showMeaning = false
+    @State var lastReviewDate = Date()
+    
+    var isCompletionPlaceholder: Bool {
+        return reviewSession.currentItem.state == .mastered
+    }
     
     init(document: Binding<Vocab_ToolDocument>, toastMessage: Binding<String>, toastColor: Binding<Color>) {
         self._document = document
@@ -89,7 +94,7 @@ struct ReviewView: View {
                     .font(.largeTitle)
                     .padding(.vertical)
                 if let pronunciation = reviewSession.currentItem.pronunciation {
-                    Text(showPronunciation ? pronunciation : "Tap to reveal pronunciation")
+                    Text(isCompletionPlaceholder || showPronunciation ? pronunciation : "Tap to reveal pronunciation")
                         .foregroundColor(showPronunciation ? .primary : .secondary)
                         .onTapGesture {
                             showPronunciation = !showPronunciation
@@ -107,6 +112,7 @@ struct ReviewView: View {
     }
     
     func master() -> Void {
+        lastReviewDate = Date()
         reviewSession.masterItem()
         toastColor = .yellow
         
@@ -122,6 +128,7 @@ struct ReviewView: View {
     }
     
     func review(success: Bool) -> Void {
+        lastReviewDate = Date()
         let delay = reviewSession.reviewItem(success: success)
         toastColor = success ? .green : .red
         
@@ -142,7 +149,15 @@ struct ReviewView: View {
     }
     
     func toggleMeaning() {
-        showMeaning = !showMeaning
+        if isCompletionPlaceholder {
+            // On tap, check if it's a new day, in which case new words may be available
+            if !lastReviewDate.isSameDay(as: Date()) {
+                lastReviewDate = Date()
+                reviewSession.nextItem()
+            }
+        } else {
+            showMeaning = !showMeaning
+        }
     }
 }
 
