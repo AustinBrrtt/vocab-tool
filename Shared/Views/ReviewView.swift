@@ -25,6 +25,7 @@ struct ReviewView: View {
     var body: some View {
         VStack {
             if showMeaning {
+                // Back of card
                 HStack {
                     Button(action: master) {
                         Label("Perfected", systemImage: "star.fill")
@@ -81,6 +82,7 @@ struct ReviewView: View {
                 .font(.system(size: 80))
                 .ignoresSafeArea()
             } else {
+                // Front of card
                 Spacer()
                 Text(reviewSession.currentItem.word)
                     .onTapGesture(perform: toggleMeaning)
@@ -88,13 +90,19 @@ struct ReviewView: View {
                     .padding(.vertical)
                 if let pronunciation = reviewSession.currentItem.pronunciation {
                     Text(showPronunciation ? pronunciation : "Tap to reveal pronunciation")
+                        .foregroundColor(showPronunciation ? .primary : .secondary)
                         .onTapGesture {
                             showPronunciation = !showPronunciation
                         }
                 }
                 Spacer()
+                
+                HStack{
+                    Spacer()
+                }
             }
         }
+        .background(Color.background.onTapGesture(perform: toggleMeaning))
         .navigationTitle("Study")
     }
     
