@@ -17,7 +17,7 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             NavigationView {
-                ReviewView(vocabList: $document.vocabList, toastMessage: $toastMessage, toastColor: $toastColor)
+                ReviewView(document: $document, toastMessage: $toastMessage, toastColor: $toastColor)
                     .toolbar {
                         ToolbarItem(placement: .navigationBarTrailing) {
                             NavigationLink("Vocab List") {

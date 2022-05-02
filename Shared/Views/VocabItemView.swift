@@ -14,9 +14,9 @@ struct VocabItemView: View {
     
     var leftText: String {
         if (!showPronunciation || vocabItem.pronunciation == nil) {
-            return vocabItem.word
+            return "\(vocabItem.priority). \(vocabItem.word)"
         }
-        return "\(vocabItem.word) (\(vocabItem.pronunciation!))"
+        return "\(vocabItem.priority). \(vocabItem.word) (\(vocabItem.pronunciation!))"
     }
     
     var rightText: String {
@@ -30,16 +30,33 @@ struct VocabItemView: View {
                     showPronunciation = !showPronunciation
                 }
             Spacer()
+            if vocabItem.state == .learning {
+                Text(Date.minutesToShortText(minutes: vocabItem.lastBreak))
+                    .foregroundColor(.secondary)
+                Spacer()
+            }
             Text(rightText)
                 .onTapGesture {
                     showMeaning = !showMeaning
                 }
+            
+            StateIcon(state: vocabItem.state)
         }.padding(.vertical)
     }
 }
 
 struct VocabItemView_Previews: PreviewProvider {
     static var previews: some View {
-        VocabItemView(vocabItem: VocabList.sample.items[0])
+        Group {
+            List(VocabList.sample.items) { item in
+                VocabItemView(vocabItem: item)
+            }
+            .padding()
+            List(VocabList.sample.items) { item in
+                VocabItemView(vocabItem: item)
+            }
+            .preferredColorScheme(.dark)
+            .padding()
+        }
     }
 }

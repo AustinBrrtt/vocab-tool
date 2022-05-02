@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D94CAF40281F952D00205234 /* StateIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94CAF3F281F952D00205234 /* StateIcon.swift */; };
+		D94CAF42281F9CC400205234 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94CAF41281F9CC400205234 /* ColorExtensions.swift */; };
 		D996C65C281E4C6800B82FD8 /* Vocab_ToolApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D996C648281E4C6600B82FD8 /* Vocab_ToolApp.swift */; };
 		D996C65D281E4C6800B82FD8 /* Vocab_ToolApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D996C648281E4C6600B82FD8 /* Vocab_ToolApp.swift */; };
 		D996C65E281E4C6800B82FD8 /* Vocab_ToolDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = D996C649281E4C6600B82FD8 /* Vocab_ToolDocument.swift */; };
@@ -30,6 +32,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D94CAF3F281F952D00205234 /* StateIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateIcon.swift; sourceTree = "<group>"; };
+		D94CAF41281F9CC400205234 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		D996C648281E4C6600B82FD8 /* Vocab_ToolApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vocab_ToolApp.swift; sourceTree = "<group>"; };
 		D996C649281E4C6600B82FD8 /* Vocab_ToolDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vocab_ToolDocument.swift; sourceTree = "<group>"; };
 		D996C64A281E4C6600B82FD8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -136,6 +140,7 @@
 				D996C674281E507600B82FD8 /* VocabListView.swift */,
 				D996C679281E694B00B82FD8 /* VocabItemView.swift */,
 				D9E04C97281F120500B7251C /* ReviewView.swift */,
+				D94CAF3F281F952D00205234 /* StateIcon.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -152,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				D9E04C9E281F1A7F00B7251C /* DateExtensions.swift */,
+				D94CAF41281F9CC400205234 /* ColorExtensions.swift */,
 			);
 			path = SystemExtensions;
 			sourceTree = "<group>";
@@ -257,6 +263,7 @@
 				D9E04C98281F120500B7251C /* ReviewView.swift in Sources */,
 				D996C65E281E4C6800B82FD8 /* Vocab_ToolDocument.swift in Sources */,
 				D9E04C9B281F159300B7251C /* ReviewSession.swift in Sources */,
+				D94CAF40281F952D00205234 /* StateIcon.swift in Sources */,
 				D996C678281E588200B82FD8 /* VocabListPreviewData.swift in Sources */,
 				D996C670281E4E5D00B82FD8 /* VocabItem.swift in Sources */,
 				D9E04C9F281F1A7F00B7251C /* DateExtensions.swift in Sources */,
@@ -266,6 +273,7 @@
 				D996C67A281E694B00B82FD8 /* VocabItemView.swift in Sources */,
 				D996C675281E507600B82FD8 /* VocabListView.swift in Sources */,
 				D996C660281E4C6800B82FD8 /* ContentView.swift in Sources */,
+				D94CAF42281F9CC400205234 /* ColorExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

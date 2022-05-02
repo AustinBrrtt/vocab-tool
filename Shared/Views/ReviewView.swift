@@ -8,40 +8,80 @@
 import SwiftUI
 
 struct ReviewView: View {
-    @Binding var vocabList: VocabList
+    @Binding var document: Vocab_ToolDocument
     @Binding var toastMessage: String
     @Binding var toastColor: Color
     @State var reviewSession: ReviewSession
     @State var showPronunciation = false
-    @State var showMeaning = false
+    @State var showMeaning = true
     
-    init(vocabList: Binding<VocabList>, toastMessage: Binding<String>, toastColor: Binding<Color>) {
-        self._vocabList = vocabList
+    init(document: Binding<Vocab_ToolDocument>, toastMessage: Binding<String>, toastColor: Binding<Color>) {
+        self._document = document
         self._toastMessage = toastMessage
         self._toastColor = toastColor
-        self._reviewSession = State<ReviewSession>(initialValue: ReviewSession(vocabList: vocabList))
+        self._reviewSession = State<ReviewSession>(initialValue: ReviewSession(document: document))
     }
     
     var body: some View {
         VStack {
             if showMeaning {
+                HStack {
+                    Button(action: master) {
+                        Label("Perfected", systemImage: "star.fill")
+                            .foregroundColor(.background)
+                            .font(.headline)
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 5)
+                            .background(Color.yellow)
+                            .cornerRadius(5)
+                    }
+                    .padding(.leading)
+                    Spacer()
+                    Text("#\(reviewSession.currentItem.priority)")
+                        .font(.headline)
+                        .padding()
+                }
                 Spacer()
                 Text(reviewSession.currentItem.meaning)
                     .font(.largeTitle)
                     .padding(.vertical)
                     .onTapGesture(perform: toggleMeaning)
                 Spacer()
-                HStack {
-                    Button("Wrong") {
+                HStack(spacing: 0) {
+                    Button(action: {
                         review(success: false)
+                    }) {
+                        HStack {
+                            Spacer()
+                            Image(systemName: "multiply")
+                                .foregroundColor(.white)
+                                .frame(width: 80, height: 80)
+                            Spacer()
+                        }
+                        .padding(.vertical)
                     }
-                    Spacer()
-                    Button("Right") {
+                    .background(Color.red)
+                    .ignoresSafeArea()
+                    
+                    Button(action: {
                         review(success: true)
+                    }) {
+                        HStack {
+                            Spacer()
+                            Image(systemName: "checkmark")
+                                .foregroundColor(.white)
+                                .frame(width: 80, height: 80)
+                            Spacer()
+                        }
+                        .padding(.vertical)
                     }
+                    .background(Color.green)
+                    .ignoresSafeArea()
                 }
-                .padding()
+                .font(.system(size: 80))
+                .ignoresSafeArea()
             } else {
+                Spacer()
                 Text(reviewSession.currentItem.word)
                     .onTapGesture(perform: toggleMeaning)
                     .font(.largeTitle)
@@ -52,9 +92,25 @@ struct ReviewView: View {
                             showPronunciation = !showPronunciation
                         }
                 }
+                Spacer()
             }
         }
-        .navigationTitle("Review")
+        .navigationTitle("Study")
+    }
+    
+    func master() -> Void {
+        reviewSession.masterItem()
+        toastColor = .yellow
+        
+        // Clear out in case message was same as last time to still trigger change
+        toastMessage = ""
+        
+        // Need slight delay so change is detected separately
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            toastMessage = "Mastered \(reviewSession.currentItem.word)"
+            reset()
+            reviewSession.nextItem()
+        }
     }
     
     func review(success: Bool) -> Void {
@@ -84,6 +140,6 @@ struct ReviewView: View {
 
 struct ReviewView_Previews: PreviewProvider {
     static var previews: some View {
-        ReviewView(vocabList: .constant(.sample), toastMessage: .constant(""), toastColor: .constant(.green))
+        ReviewView(document: .constant(Vocab_ToolDocument(list: .sample)), toastMessage: .constant(""), toastColor: .constant(.green))
     }
 }
