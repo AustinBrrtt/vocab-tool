@@ -8,20 +8,56 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var showToast = false
+    @State var toastMessage = ""
+    @State var toastColor = Color.accentColor
+    @State var lastToast = UUID()
     @Binding var document: Vocab_ToolDocument
 
     var body: some View {
-        NavigationView {
-            ReviewView(vocabList: $document.vocabList)
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        NavigationLink("Vocab List") {
-                            VocabListView(vocabList: $document.vocabList)
+        ZStack {
+            NavigationView {
+                ReviewView(vocabList: $document.vocabList, toastMessage: $toastMessage, toastColor: $toastColor)
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            NavigationLink("Vocab List") {
+                                VocabListView(vocabList: $document.vocabList)
+                            }
+                        }
+                    }
+            }
+            VStack {
+                if showToast {
+                    Text(toastMessage)
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(toastColor)
+                        .cornerRadius(25)
+                        .padding()
+                        .transition(AnyTransition.move(edge: .top).combined(with: .opacity))
+                }
+                Spacer()
+            }
+        }
+        .onChange(of: toastMessage) { _ in
+            if (toastMessage.isEmpty) {
+                showToast = false // No animation
+            } else {
+                let thisToast = UUID()
+                withAnimation {
+                    showToast = true
+                    lastToast = thisToast
+                }
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    if lastToast == thisToast {
+                        withAnimation {
+                            showToast = false
                         }
                     }
                 }
+            }
         }
-        
     }
 }
 

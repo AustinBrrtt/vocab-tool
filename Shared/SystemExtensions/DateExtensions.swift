@@ -352,6 +352,51 @@ extension Date {
         let yearTemplate = yearLength == .none ? "" : yearLength == .short ? "yy" : "yyyy"
         return formatted(fromTemplate: weekTemplate + dayTemplate + monthTemplate + yearTemplate)
     }
+    
+    static func minutesToShortText(minutes: Int) -> String {
+        // Up to 90 minutes (except special case of 60m), just say how many minutes
+        if minutes < 90 && minutes != 60 {
+            return "\(minutes)m"
+        }
+        
+        // Special case: at 60m, say 1h
+        if minutes == 60 {
+            return "1h"
+        }
+        
+        // Under 1 day, round to nearest half-hour, e.g. 3.5h
+        if minutes < 1440 {
+            let hrs = minutes / 60
+            let rem = minutes % 60
+            if rem < 15 {
+                return "\(hrs)h"
+            }
+            if rem < 45 {
+                return "\(hrs).5h"
+            }
+            return "\(hrs + 1)h"
+        }
+        
+        let days = minutes / 1440
+        let rem = minutes % 1440
+        
+        // Under 7 days, round to nearest half-day, e.g. 6.5d
+        if minutes < 1080 {
+            if rem < 360 {
+                return "\(days)d"
+            }
+            if rem < 1080 {
+                return "\(days).5d"
+            }
+            return "\(days + 1)d"
+        }
+        
+        // At and above 7 days, round to nearest full day, e.g. 8d
+        if rem < 720 {
+            return "\(days)d"
+        }
+        return "\(days + 1)d"
+    }
 }
 
 // MARK: Quick Initialization

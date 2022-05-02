@@ -17,7 +17,7 @@ extension UTType {
 struct Vocab_ToolDocument: FileDocument {
     var vocabList: VocabList
 
-    init(list: VocabList = VocabList(items: [VocabItem(word: "iku", meaning: "go", priority: 1, state: .mastered)])) {
+    init(list: VocabList = VocabList(items: [])) {
         vocabList = list
     }
 

@@ -12,10 +12,13 @@ class ReviewSession {
     var vocabList: Binding<VocabList>
     let reviewSize = 25
     
+    // In Minutes:    1m  10m 1h   1d    3d    7d     10d    15d    30d
+    let reviewTimes = [1, 10, 60, 1440, 4320, 10080, 14400, 21600, 43200]
+    
     var currentItem: VocabItem {
         hasItem
         ? vocabList.wrappedValue.items[reviewIndex]
-        : VocabItem(word: "List Complete", meaning: "You have mastered all items in this list", priority: -1, state: .mastered)
+        : VocabItem(word: "List Complete", meaning: "You have mastered all items in this list", priority: -1, lastBreak: 0, state: .mastered)
     }
     
     var hasItem: Bool {
@@ -30,11 +33,7 @@ class ReviewSession {
         nextItem()
     }
     
-    private func nextItem(updateCurrent: () -> Void = {}) -> Void {
-        if hasItem {
-            updateCurrent()
-        }
-        
+    func nextItem() -> Void {
         let learningItems = vocabList.wrappedValue.items.filter({ item in item.state == .learning }).sorted(by: { a, b in a.nextReviewDate! < b.nextReviewDate! })
         if learningItems.count > 0, let idx = vocabList.wrappedValue.items.firstIndex(of: learningItems[0]) {
             reviewIndex = idx
@@ -51,22 +50,24 @@ class ReviewSession {
     }
     
     func masterItem() -> Void {
-        nextItem {
+        if hasItem {
             vocabList.wrappedValue.items[reviewIndex].state = .mastered
         }
     }
     
-    func markItemGood() -> Void {
-        nextItem {
+    func reviewItem(success: Bool) -> Int {
+        var result = 0
+        
+        if hasItem {
+            result = success ? nextReviewTime(after: vocabList.wrappedValue.items[reviewIndex].lastBreak) : reviewTimes.first!
             vocabList.wrappedValue.items[reviewIndex].state = .learning
-            vocabList.wrappedValue.items[reviewIndex].nextReviewDate = Date.now.add(10, .minute) // TODO: Spaced Repitition
+            vocabList.wrappedValue.items[reviewIndex].nextReviewDate = Date.now.add(result, .minute)
         }
+        return result
     }
     
-    func markItemBad() -> Void {
-        nextItem {
-            vocabList.wrappedValue.items[reviewIndex].state = .learning
-            vocabList.wrappedValue.items[reviewIndex].nextReviewDate = Date.now.add(1, .minute) // TODO: Spaced Repitition
-        }
+    private func nextReviewTime(after prevReviewTime: Int?) -> Int {
+        let prev = prevReviewTime ?? 0
+        return reviewTimes.first(where: { t in t > prev }) ?? reviewTimes.last!
     }
 }

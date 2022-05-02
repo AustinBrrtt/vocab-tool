@@ -13,6 +13,7 @@ struct VocabItem: Codable, Identifiable, Equatable {
     var pronunciation: String?
     var meaning: String
     var priority: Int
+    var lastBreak: Int
     var state: VocabState
     var nextReviewDate: Date? // Note: Must be non-nil if state is .learning
     
@@ -21,11 +22,12 @@ struct VocabItem: Codable, Identifiable, Equatable {
         case pronunciation
         case meaning
         case priority
+        case lastBreak
         case state
         case nextReviewDate
     }
     
-    // Only used for allowing Array.index(of:)
+    // Only used for allowing Array.firstIndex(of:)
     static func ==(lhs: VocabItem, rhs: VocabItem) -> Bool {
         return lhs.id == rhs.id
     }
