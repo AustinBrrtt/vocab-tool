@@ -29,7 +29,7 @@ struct ContentView: View {
             VStack {
                 if showToast {
                     Text(toastMessage)
-                        .foregroundColor(.white)
+                        .foregroundColor(.background)
                         .padding()
                         .background(toastColor)
                         .cornerRadius(25)
