@@ -9,4 +9,6 @@ import Foundation
 
 struct VocabList: Codable {
     var items: [VocabItem]
+    var lastReviewDate: Date
+    var lastReviewDayCount: Int
 }

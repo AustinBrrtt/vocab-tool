@@ -33,7 +33,7 @@ struct ReviewView: View {
                 // Back of card
                 HStack {
                     Button(action: master) {
-                        Label("Perfected", systemImage: "star.fill")
+                        Label("Mark as Perfected", systemImage: "star.fill")
                             .foregroundColor(.background)
                             .font(.headline)
                             .padding(.horizontal, 10)
@@ -47,13 +47,23 @@ struct ReviewView: View {
                         .font(.headline)
                         .padding()
                 }
+                Text(reviewSession.currentItem.word)
+                    .font(.largeTitle)
+                    .padding(.vertical)
+                if let pronunciation = reviewSession.currentItem.pronunciation {
+                    Text(pronunciation)
+                        .foregroundColor(.secondary)
+                        .padding(8)
+                        .overlay(RoundedRectangle(cornerRadius: 5).stroke(Color.secondary))
+                }
                 Spacer()
                 Text(reviewSession.currentItem.meaning)
                     .font(.largeTitle)
                     .padding(.vertical)
                     .onTapGesture(perform: toggleMeaning)
                 Spacer()
-                HStack(spacing: 0) {
+                Spacer()
+                HStack(spacing: 1.5) {
                     Button(action: {
                         review(success: false)
                     }) {
@@ -84,6 +94,8 @@ struct ReviewView: View {
                     .background(Color.green)
                     .ignoresSafeArea()
                 }
+                .padding(.top, 1.5)
+                .background(Color.primary)
                 .font(.system(size: 80))
                 .ignoresSafeArea()
             } else {

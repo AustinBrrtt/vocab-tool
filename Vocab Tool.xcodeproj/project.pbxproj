@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		D94CAF40281F952D00205234 /* StateIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94CAF3F281F952D00205234 /* StateIcon.swift */; };
 		D94CAF42281F9CC400205234 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94CAF41281F9CC400205234 /* ColorExtensions.swift */; };
+		D94CAF442820D7F900205234 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94CAF432820D7F900205234 /* StatsView.swift */; };
 		D996C65C281E4C6800B82FD8 /* Vocab_ToolApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D996C648281E4C6600B82FD8 /* Vocab_ToolApp.swift */; };
 		D996C65D281E4C6800B82FD8 /* Vocab_ToolApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D996C648281E4C6600B82FD8 /* Vocab_ToolApp.swift */; };
 		D996C65E281E4C6800B82FD8 /* Vocab_ToolDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = D996C649281E4C6600B82FD8 /* Vocab_ToolDocument.swift */; };
@@ -34,6 +35,7 @@
 /* Begin PBXFileReference section */
 		D94CAF3F281F952D00205234 /* StateIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateIcon.swift; sourceTree = "<group>"; };
 		D94CAF41281F9CC400205234 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
+		D94CAF432820D7F900205234 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 		D996C648281E4C6600B82FD8 /* Vocab_ToolApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vocab_ToolApp.swift; sourceTree = "<group>"; };
 		D996C649281E4C6600B82FD8 /* Vocab_ToolDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vocab_ToolDocument.swift; sourceTree = "<group>"; };
 		D996C64A281E4C6600B82FD8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 				D996C679281E694B00B82FD8 /* VocabItemView.swift */,
 				D9E04C97281F120500B7251C /* ReviewView.swift */,
 				D94CAF3F281F952D00205234 /* StateIcon.swift */,
+				D94CAF432820D7F900205234 /* StatsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -271,6 +274,7 @@
 				D996C672281E4EA200B82FD8 /* VocabState.swift in Sources */,
 				D996C65C281E4C6800B82FD8 /* Vocab_ToolApp.swift in Sources */,
 				D996C67A281E694B00B82FD8 /* VocabItemView.swift in Sources */,
+				D94CAF442820D7F900205234 /* StatsView.swift in Sources */,
 				D996C675281E507600B82FD8 /* VocabListView.swift in Sources */,
 				D996C660281E4C6800B82FD8 /* ContentView.swift in Sources */,
 				D94CAF42281F9CC400205234 /* ColorExtensions.swift in Sources */,
@@ -424,6 +428,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportsDocumentBrowser = YES;
@@ -458,6 +463,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportsDocumentBrowser = YES;

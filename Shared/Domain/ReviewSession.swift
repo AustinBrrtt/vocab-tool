@@ -10,7 +10,7 @@ import SwiftUI
 class ReviewSession {
     var reviewIndex = 0
     var document: Binding<Vocab_ToolDocument>
-    let maxLearningCount = 25
+    let maxReviewsPerDay = 40 // Maximum reviews before new cards stop being added for a day - This means actual number of reviews will be much higher, likely more than double this
     
     // In Minutes:    1m  10m 1h   1d    3d    7d     10d    15d    30d
     let reviewTimes = [1, 10, 60, 1440, 4320, 10080, 14400, 21600, 43200]
@@ -19,6 +19,10 @@ class ReviewSession {
         hasItem
         ? document.vocabList.wrappedValue.items[reviewIndex]
         : VocabItem(word: "Studying Complete", pronunciation: "You have completed your studying for today", meaning: "", priority: -1, lastBreak: 0, state: .mastered)
+    }
+    
+    private var timeToWindDown: Bool {
+        return isSameStudyDay(document.wrappedValue.vocabList.lastReviewDate) && document.wrappedValue.vocabList.lastReviewDayCount >= maxReviewsPerDay
     }
     
     var hasItem: Bool {
@@ -40,15 +44,15 @@ class ReviewSession {
         }
         
         // If there's room for more "learning" items, select the first item with "untouched" status
-        if learningItems.count < maxLearningCount, let idx = document.vocabList.wrappedValue.items.firstIndex(where: { item in item.state == .untouched }) {
+        if !timeToWindDown, let idx = document.vocabList.wrappedValue.items.firstIndex(where: { item in item.state == .untouched }) {
             reviewIndex = idx
             return
         }
         
         
-        // If none are "untouched", go back to the items with "learning" status and select the one with the earliest due date, as long as it is this calendar day
+        // If winddown is reached, or none are "untouched", go back to the items with "learning" status and select the one with the earliest due date, as long as it is this calendar day
         // If next item is for a different calendar day, we are done for the day
-        if learningItems.count > 0, learningItems[0].nextReviewDate!.isSameDay(as: Date()), let idx = document.vocabList.wrappedValue.items.firstIndex(of: learningItems[0]) {
+        if learningItems.count > 0, isSameStudyDay(learningItems[0].nextReviewDate!), let idx = document.vocabList.wrappedValue.items.firstIndex(of: learningItems[0]) {
             reviewIndex = idx
             return
         }
@@ -83,5 +87,19 @@ class ReviewSession {
         // On success, advance to the next time slot
         let result = reviewTimes.first(where: { t in t > item.lastBreak }) ?? reviewTimes.last!
         return (result, Date().add(result, .minute))
+    }
+    
+    private func isSameStudyDay(_ lhs: Date, _ rhs: Date = Date()) -> Bool {
+        return lhs.add(-4, .hour).isSameDay(as: rhs.add(-4, .hour)) // TODO: Make offset configurable. -4 means 4 AM treated as midnight.
+    }
+    
+    private func incrementDailyReviewCount() -> Void {
+        let now = Date()
+        if (!isSameStudyDay(document.wrappedValue.vocabList.lastReviewDate, now)) {
+            document.wrappedValue.vocabList.lastReviewDate = now
+            document.wrappedValue.vocabList.lastReviewDayCount = 0
+        }
+        
+        document.wrappedValue.vocabList.lastReviewDayCount += 1
     }
 }

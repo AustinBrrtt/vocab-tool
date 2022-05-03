@@ -14,6 +14,13 @@ struct VocabListView: View {
         List(vocabList.items) { item in
             VocabItemView(vocabItem: item)
         }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                NavigationLink("Statistics") {
+                    StatsView(vocabList: $vocabList)
+                }
+            }
+        }
     }
 }
 

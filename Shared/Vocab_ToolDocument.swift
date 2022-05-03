@@ -17,7 +17,7 @@ extension UTType {
 struct Vocab_ToolDocument: FileDocument {
     var vocabList: VocabList
 
-    init(list: VocabList = VocabList(items: [])) {
+    init(list: VocabList = VocabList(items: [], lastReviewDate: Date(), lastReviewDayCount: 0)) { // TODO: Default Sample List for New Documents
         vocabList = list
     }
 
