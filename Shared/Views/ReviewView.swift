@@ -11,20 +11,12 @@ struct ReviewView: View {
     @Binding var document: Vocab_ToolDocument
     @Binding var toastMessage: String
     @Binding var toastColor: Color
-    @State var reviewSession: ReviewSession
     @State var showPronunciation = false
     @State var showMeaning = false
     @State var lastReviewDate = Date()
     
     var isCompletionPlaceholder: Bool {
-        return reviewSession.currentItem.state == .mastered
-    }
-    
-    init(document: Binding<Vocab_ToolDocument>, toastMessage: Binding<String>, toastColor: Binding<Color>) {
-        self._document = document
-        self._toastMessage = toastMessage
-        self._toastColor = toastColor
-        self._reviewSession = State<ReviewSession>(initialValue: ReviewSession(document: document))
+        return document.currentItem.state == .mastered
     }
     
     var body: some View {
@@ -43,21 +35,21 @@ struct ReviewView: View {
                     }
                     .padding(.leading)
                     Spacer()
-                    Text("#\(reviewSession.currentItem.priority)")
+                    Text("#\(document.currentItem.priority)")
                         .font(.headline)
                         .padding()
                 }
-                Text(reviewSession.currentItem.word)
+                Text(document.currentItem.word)
                     .font(.largeTitle)
                     .padding(.vertical)
-                if let pronunciation = reviewSession.currentItem.pronunciation {
+                if let pronunciation = document.currentItem.pronunciation {
                     Text(pronunciation)
                         .foregroundColor(.secondary)
                         .padding(8)
                         .overlay(RoundedRectangle(cornerRadius: 5).stroke(Color.secondary))
                 }
                 Spacer()
-                Text(reviewSession.currentItem.meaning)
+                Text(document.currentItem.meaning)
                     .font(.largeTitle)
                     .padding(.vertical)
                     .onTapGesture(perform: toggleMeaning)
@@ -101,10 +93,10 @@ struct ReviewView: View {
             } else {
                 // Front of card
                 Spacer()
-                Text(reviewSession.currentItem.word)
+                Text(document.currentItem.word)
                     .onTapGesture(perform: toggleMeaning)
                     .font(.largeTitle)
-                if let pronunciation = reviewSession.currentItem.pronunciation {
+                if let pronunciation = document.currentItem.pronunciation {
                     Text(isCompletionPlaceholder || showPronunciation ? pronunciation : "Tap to reveal pronunciation")
                         .multilineTextAlignment(.center)
                         .foregroundColor(.secondary)
@@ -132,7 +124,7 @@ struct ReviewView: View {
     
     func master() -> Void {
         lastReviewDate = Date()
-        reviewSession.masterItem()
+        document.masterItem()
         toastColor = .yellow
         
         // Clear out in case message was same as last time to still trigger change
@@ -140,15 +132,15 @@ struct ReviewView: View {
         
         // Need slight delay so change is detected separately
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            toastMessage = "Mastered \(reviewSession.currentItem.word)"
+            toastMessage = "Mastered \(document.currentItem.word)"
             reset()
-            reviewSession.nextItem()
+            document.nextItem()
         }
     }
     
     func review(success: Bool) -> Void {
         lastReviewDate = Date()
-        let delay = reviewSession.reviewItem(success: success)
+        let delay = document.reviewItem(success: success)
         toastColor = success ? .green : .red
         
         // Clear out in case message was same as last time to still trigger change
@@ -158,7 +150,7 @@ struct ReviewView: View {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             toastMessage = "+\(Date.minutesToShortText(minutes: delay))"
             reset()
-            reviewSession.nextItem()
+            document.nextItem()
         }
     }
     
@@ -172,7 +164,7 @@ struct ReviewView: View {
             // On tap, check if it's a new day, in which case new words may be available
             if !lastReviewDate.isSameDay(as: Date()) {
                 lastReviewDate = Date()
-                reviewSession.nextItem()
+                document.nextItem()
             }
         } else {
             showMeaning = !showMeaning
