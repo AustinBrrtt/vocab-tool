@@ -63,12 +63,14 @@ class ReviewSession {
     
     func masterItem() -> Void {
         if hasItem {
+            incrementDailyReviewCount()
             document.vocabList.wrappedValue.items[reviewIndex].state = .mastered
         }
     }
     
     func reviewItem(success: Bool) -> Int {
         if hasItem {
+            incrementDailyReviewCount()
             let (nextBreak, date) = nextReviewTime(for: document.vocabList.wrappedValue.items[reviewIndex], success: success)
             document.vocabList.wrappedValue.items[reviewIndex].lastBreak = nextBreak
             document.vocabList.wrappedValue.items[reviewIndex].state = .learning
@@ -95,11 +97,11 @@ class ReviewSession {
     
     private func incrementDailyReviewCount() -> Void {
         let now = Date()
-        if (!isSameStudyDay(document.wrappedValue.vocabList.lastReviewDate, now)) {
-            document.wrappedValue.vocabList.lastReviewDate = now
-            document.wrappedValue.vocabList.lastReviewDayCount = 0
+        if (!isSameStudyDay(document.vocabList.wrappedValue.lastReviewDate, now)) {
+            document.vocabList.wrappedValue.lastReviewDate = now
+            document.vocabList.wrappedValue.lastReviewDayCount = 0
         }
         
-        document.wrappedValue.vocabList.lastReviewDayCount += 1
+        document.vocabList.wrappedValue.lastReviewDayCount = document.vocabList.wrappedValue.lastReviewDayCount + 1
     }
 }

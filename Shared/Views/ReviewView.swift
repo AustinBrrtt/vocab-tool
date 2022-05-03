@@ -104,12 +104,17 @@ struct ReviewView: View {
                 Text(reviewSession.currentItem.word)
                     .onTapGesture(perform: toggleMeaning)
                     .font(.largeTitle)
-                    .padding(.vertical)
                 if let pronunciation = reviewSession.currentItem.pronunciation {
                     Text(isCompletionPlaceholder || showPronunciation ? pronunciation : "Tap to reveal pronunciation")
+                        .multilineTextAlignment(.center)
                         .foregroundColor(.secondary)
                         .padding(8)
                         .overlay(RoundedRectangle(cornerRadius: 5).stroke(Color.secondary))
+                        .padding(.bottom, 40)
+                        .padding(.top, 20)
+                        .padding(.horizontal, 40) // Make it easier to tap
+                        .background(Color.background)
+                        .padding(.top, -20)
                         .onTapGesture {
                             showPronunciation = !showPronunciation
                         }
