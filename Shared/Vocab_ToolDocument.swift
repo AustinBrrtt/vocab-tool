@@ -101,7 +101,7 @@ extension Vocab_ToolDocument {
             // In this case, the only card left for today is one we recently looked at, so we'll make an exception and grab a card that we did today and is due tomorrow
             // But we won't increment its review delay if we get it right so it still shows up next tomorrow
             let tomorrow = Date().add(1, .day)
-            if let backupItem = learningItems.first(where: { item in isSameStudyDay(item.nextReviewDate!, tomorrow) && item.lastBreak == 1440 }), let idx = vocabList.items.firstIndex(of: backupItem) {
+            if let backupItem = learningItems.first(where: { item in item.lastBreak == 1440 && isSameStudyDay(item.nextReviewDate!, tomorrow) && !haveSeenRecently(item) }), let idx = vocabList.items.firstIndex(of: backupItem) {
                 isBackupSpacerCard = true
                 reviewIndex = idx
                 return
