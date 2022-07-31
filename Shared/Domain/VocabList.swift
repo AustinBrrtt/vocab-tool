@@ -9,6 +9,13 @@ import Foundation
 
 struct VocabList: Codable {
     var items: [VocabItem]
-    var lastReviewDate: Date
-    var lastReviewDayCount: Int
+    var lastStudyDate: Date
+    var lastStudyDaySeenCards: Set<Int>
+    var lastStudyDayNewCardCount: Int
+    var maxNewCardsPerDay: Int
+    var maxReviewsPerDay: Int
+    
+    var maxTotalCardsPerDay: Int {
+        maxReviewsPerDay + maxNewCardsPerDay
+    }
 }

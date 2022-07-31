@@ -15,5 +15,5 @@ extension VocabList {
         VocabItem(word: "多い", pronunciation: "ooi", meaning: "many", priority: 4, lastBreak: 163, state: .learning, nextReviewDate: Date().add(1, .day)),
         VocabItem(word: "家", pronunciation: "ie", meaning: "home", priority: 5, lastBreak: 0, state: .untouched),
         VocabItem(word: "donna", meaning: "woman", priority: 5, lastBreak: 6, state: .untouched)
-    ], lastReviewDate: Date(), lastReviewDayCount: 0)
+    ], lastStudyDate: Date(), lastStudyDaySeenCards: [], lastStudyDayNewCardCount: 0, maxNewCardsPerDay: 10, maxReviewsPerDay: 40)
 }
