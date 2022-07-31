@@ -21,8 +21,9 @@ struct Vocab_ToolDocument: FileDocument {
     var recentlySeen = Cache<Int>(size: 3)
     let maxReviewsPerDay = 40 // Maximum reviews before new cards stop being added for a day - This means actual number of reviews will be much higher, likely more than double this
     
-    // In Minutes:    1m  10m 1h   1d    3d    7d     10d    15d    30d
-    let reviewTimes = [1, 10, 60, 1440, 4320, 10080, 14400, 21600, 43200]
+    // In Minutes:    10m  1h   1d    3d    7d     10d    15d    30d    60d    90d     180d    365d
+    let reviewTimes = [10, 60, 1440, 4320, 10080, 14400, 21600, 43200, 86400, 129600, 259200, 525600]
+    let mistakeReviewTime = 1
     
     var currentItem: VocabItem {
         hasItem
@@ -156,7 +157,7 @@ extension Vocab_ToolDocument {
     private func nextReviewTime(for item: VocabItem, success: Bool) -> (Int, Date) {
         // On failure, even if not due yet, jump back to beginning and review soon
         if !success {
-            return (reviewTimes.first!, Date().add(reviewTimes.first!, .minute))
+            return (mistakeReviewTime, Date().add(reviewTimes.first!, .minute))
         }
         
         // On success, advance to the next time slot (unless this is a backup card, in which case we'll leave it as is)
