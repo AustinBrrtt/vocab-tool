@@ -53,19 +53,12 @@ struct EditItemView: View {
                 }
             }
         }
-        .background(Color.background.opacity(0.65))
-        .cornerRadius(5)
-        .shadow(radius: 4)
-        .padding()
-        .frame(height: 500)
-        .transaction { t in
-            t.animation = nil
-        }
     }
 }
 
 struct EditItemView_Previews: PreviewProvider {
     static var previews: some View {
         EditItemView(item: .constant(VocabList.sample.items[0]))
+            .asCard()
     }
 }

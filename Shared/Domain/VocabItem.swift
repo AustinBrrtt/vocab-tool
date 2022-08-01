@@ -29,9 +29,20 @@ struct VocabItem: Codable, Identifiable, Equatable {
         case nextReviewDate
     }
     
-    // Only used for allowing Array.firstIndex(of:)
+    // Needs to check all fields or bindings get messed up (won't allow changes if the changes don't change the equality of the object)
     static func ==(lhs: VocabItem, rhs: VocabItem) -> Bool {
-        return lhs.id == rhs.id
+        return equalIn(\.id, lhs, rhs) &&
+        equalIn(\.word, lhs, rhs) &&
+        equalIn(\.pronunciation, lhs, rhs) &&
+        equalIn(\.meaning, lhs, rhs) &&
+        equalIn(\.priority, lhs, rhs) &&
+        equalIn(\.lastBreak, lhs, rhs) &&
+        equalIn(\.state, lhs, rhs) &&
+        equalIn(\.nextReviewDate, lhs, rhs)
+    }
+    
+    private static func equalIn<T: Equatable>(_ property: KeyPath<VocabItem, T>, _ lhs: VocabItem, _ rhs: VocabItem) -> Bool {
+        return lhs[keyPath: property] == rhs[keyPath: property]
     }
     
     static func nextBreakAndReviewDate(after currentBreak: Int, from date: Date, action: NextBreakAction) -> (Int, Date) {

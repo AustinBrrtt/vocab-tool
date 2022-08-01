@@ -29,19 +29,7 @@ struct FlashCardView: View {
                 FlashCardObverseView(item: item, isCompletionPlaceholder: isCompletionPlaceholder, flipCard: flipCard)
             }
         }
-        .padding(.horizontal, 2)
-        .background(
-            Rectangle()
-                .foregroundColor(Color.background.opacity(0.65))
-                .onTapGesture(perform: flipCard)
-        )
-        .cornerRadius(5)
-        .shadow(radius: 4)
-        .padding()
-        .frame(height: 500)
-        .transaction { t in
-            t.animation = nil
-        }
+        .asCard(onBackgroundTap: flipCard)
     }
     
     func flipCard() {

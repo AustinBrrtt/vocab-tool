@@ -28,7 +28,7 @@ struct VocabListView: View {
                     .background(.regularMaterial)
                     .cornerRadius(15)
                     .listRowSeparator(.hidden)
-                    .listRowInsets(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
+                    .listRowInsets(EdgeInsets(top: 10, leading: 20, bottom: (idx == vocabList.items.count - 1) ? 100 : 10, trailing: 20))
             }
             .listStyle(.plain)
             .toolbar {
@@ -40,6 +40,27 @@ struct VocabListView: View {
                             StatsView(vocabList: $vocabList)
                         }
                     }
+                }
+            }
+            
+            VStack {
+                Spacer()
+                HStack {
+                    Spacer()
+                    NavigationLink(destination: { NewItemView(vocabList: $vocabList) }) {
+                        Image(systemName: "plus.circle.fill")
+                            .foregroundColor(.green.opacity(0.7))
+                            .foregroundStyle(.ultraThinMaterial)
+                            .font(.system(size: 50))
+                            .background(
+                                Rectangle()
+                                    .foregroundStyle(.regularMaterial)
+                                    .cornerRadius(100)
+                                    .padding(4)
+                            )
+                            .cornerRadius(100)
+                    }
+                    .padding()
                 }
             }
             
@@ -59,6 +80,7 @@ struct VocabListView: View {
                 
                 if isEditMode {
                     EditItemView(item: $vocabList.items[shownCard])
+                        .asCard()
                 } else {
                     FlashCardView(showReverse: $showCardReverse, item: vocabList.items[shownCard], isCompletionPlaceholder: false)
                         .transition(.opacity)

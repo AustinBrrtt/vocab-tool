@@ -21,6 +21,8 @@
 		D993C8F628982124009A82E3 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D993C8F528982124009A82E3 /* Config.swift */; };
 		D993C8F82898361E009A82E3 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D993C8F72898361E009A82E3 /* ViewExtensions.swift */; };
 		D993C8FA289838C4009A82E3 /* FlashCardPickerPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = D993C8F9289838C4009A82E3 /* FlashCardPickerPreview.swift */; };
+		D993C8FC28983BB1009A82E3 /* NewItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D993C8FB28983BB1009A82E3 /* NewItemView.swift */; };
+		D993C90628986BF1009A82E3 /* SearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D993C90528986BF1009A82E3 /* SearchResults.swift */; };
 		D996C65C281E4C6800B82FD8 /* Vocab_ToolApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D996C648281E4C6600B82FD8 /* Vocab_ToolApp.swift */; };
 		D996C65D281E4C6800B82FD8 /* Vocab_ToolApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D996C648281E4C6600B82FD8 /* Vocab_ToolApp.swift */; };
 		D996C65E281E4C6800B82FD8 /* Vocab_ToolDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = D996C649281E4C6600B82FD8 /* Vocab_ToolDocument.swift */; };
@@ -56,6 +58,8 @@
 		D993C8F528982124009A82E3 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		D993C8F72898361E009A82E3 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		D993C8F9289838C4009A82E3 /* FlashCardPickerPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardPickerPreview.swift; sourceTree = "<group>"; };
+		D993C8FB28983BB1009A82E3 /* NewItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewItemView.swift; sourceTree = "<group>"; };
+		D993C90528986BF1009A82E3 /* SearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResults.swift; sourceTree = "<group>"; };
 		D996C648281E4C6600B82FD8 /* Vocab_ToolApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vocab_ToolApp.swift; sourceTree = "<group>"; };
 		D996C649281E4C6600B82FD8 /* Vocab_ToolDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vocab_ToolDocument.swift; sourceTree = "<group>"; };
 		D996C64A281E4C6600B82FD8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -171,6 +175,8 @@
 				D993C8EB289794A2009A82E3 /* ReviewButtonsView.swift */,
 				D993C8EF28979E5D009A82E3 /* FrameSpacer.swift */,
 				D993C8F32897BD7F009A82E3 /* EditItemView.swift */,
+				D993C8FB28983BB1009A82E3 /* NewItemView.swift */,
+				D993C90528986BF1009A82E3 /* SearchResults.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -292,6 +298,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D993C8FC28983BB1009A82E3 /* NewItemView.swift in Sources */,
 				D9E04C98281F120500B7251C /* ReviewView.swift in Sources */,
 				D996C65E281E4C6800B82FD8 /* Vocab_ToolDocument.swift in Sources */,
 				D94CAF40281F952D00205234 /* StateIcon.swift in Sources */,
@@ -316,6 +323,7 @@
 				D996C660281E4C6800B82FD8 /* ContentView.swift in Sources */,
 				D993C8E428978B07009A82E3 /* FlashCardObverseView.swift in Sources */,
 				D993C8EC289794A2009A82E3 /* ReviewButtonsView.swift in Sources */,
+				D993C90628986BF1009A82E3 /* SearchResults.swift in Sources */,
 				D94CAF42281F9CC400205234 /* ColorExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -385,8 +393,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -440,8 +448,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -470,7 +478,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportsDocumentBrowser = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -505,7 +513,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportsDocumentBrowser = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -541,7 +549,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "io.austinbarrett.Vocab-Tool";
 				PRODUCT_NAME = "Vocab Tool";
@@ -571,7 +579,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "io.austinbarrett.Vocab-Tool";
 				PRODUCT_NAME = "Vocab Tool";
