@@ -45,6 +45,6 @@ struct FlashCardObverseView: View {
 
 struct FlashCardObverseView_Previews: PreviewProvider {
     static var previews: some View {
-        FlashCardView(showReverse: .constant(false), item: VocabList.sample.items[0], isCompletionPlaceholder: false)
+        FlashCardPickerPreview(showReverse: false)
     }
 }

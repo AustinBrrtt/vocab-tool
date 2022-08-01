@@ -14,20 +14,20 @@ struct FlashCardReverseView: View {
     var body: some View {
         VStack {
             VStack {
-                HStack(alignment: .top) {
-                    FrameSpacer(.horizontal)
-                    
+                ZStack(alignment: .top) {
                     VStack {
                         Text(item.word)
                             .font(.largeTitle)
                             .padding(.vertical)
                         if let pronunciation = item.pronunciation {
                             Text(pronunciation)
+                                .allowMultiline()
                                 .foregroundColor(.secondary)
                                 .padding(8)
                                 .overlay(RoundedRectangle(cornerRadius: 5).stroke(Color.secondary))
                         }
                     }
+                    .padding(.top)
                     
                     HStack {
                         Spacer()
@@ -35,13 +35,14 @@ struct FlashCardReverseView: View {
                             .font(.headline)
                             .padding()
                     }
-                    .frame(maxWidth: .infinity)
                 }
                 Spacer()
             }.frame(maxHeight: .infinity)
             
             Text(item.meaning)
                 .font(.largeTitle)
+                .multilineTextAlignment(.center)
+                .allowMultiline()
                 .padding(.vertical)
                 .onTapGesture(perform: flipCard)
             
@@ -52,6 +53,6 @@ struct FlashCardReverseView: View {
 
 struct FlashCardReverseView_Previews: PreviewProvider {
     static var previews: some View {
-        FlashCardView(showReverse: .constant(true), item: VocabList.sample.items[0], isCompletionPlaceholder: false)
+        FlashCardPickerPreview(showReverse: true)
     }
 }

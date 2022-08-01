@@ -29,6 +29,7 @@ struct FlashCardView: View {
                 FlashCardObverseView(item: item, isCompletionPlaceholder: isCompletionPlaceholder, flipCard: flipCard)
             }
         }
+        .padding(.horizontal, 2)
         .background(
             Rectangle()
                 .foregroundColor(Color.background.opacity(0.65))
@@ -54,7 +55,7 @@ struct FlashCardView: View {
 
 struct FlashCardView_Previews: PreviewProvider {
     static var previews: some View {
-        FlashCardView(showReverse: .constant(true), item: VocabList.sample.items[0], isCompletionPlaceholder: false)
+        FlashCardPickerPreview()
         FlashCardView(showReverse: .constant(true), item: VocabItem.placeholderItem, isCompletionPlaceholder: true)
     }
 }
