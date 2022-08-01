@@ -9,15 +9,20 @@ import SwiftUI
 
 struct VocabListView: View {
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.editMode) var editMode
     @Binding var vocabList: VocabList
-    @State var shownCard: VocabItem = VocabItem.placeholderItem
+    @State var shownCard: Int = 0
     @State var cardShown: Bool = false
     @State var showCardReverse: Bool = true
     
+    var isEditMode: Bool {
+        return editMode?.wrappedValue.isEditing ?? false
+    }
+    
     var body: some View {
         ZStack {
-            List(vocabList.items) { item in
-                VocabItemView(vocabItem: item, showCard: showCard)
+            List($vocabList.items.indices, id: \.self) { idx in
+                VocabItemView(vocabItem: $vocabList.items[idx], index: idx, showCard: showCard)
                     .padding(.horizontal)
                     .padding(.vertical, 5)
                     .background(.regularMaterial)
@@ -28,8 +33,12 @@ struct VocabListView: View {
             .listStyle(.plain)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink("Statistics") {
-                        StatsView(vocabList: $vocabList)
+                    if cardShown {
+                        EditButton()
+                    } else {
+                        NavigationLink("Statistics") {
+                            StatsView(vocabList: $vocabList)
+                        }
                     }
                 }
             }
@@ -41,18 +50,25 @@ struct VocabListView: View {
                     .edgesIgnoringSafeArea(.all)
                     .onTapGesture {
                         withAnimation(.linear.speed(3)) {
-                            cardShown = false
+                            if !isEditMode {
+                                cardShown = false
+                            }
                         }
                     }
                     .transition(.opacity)
-                FlashCardView(showReverse: $showCardReverse, item: shownCard, isCompletionPlaceholder: false)
-                    .transition(.opacity)
+                
+                if isEditMode {
+                    EditItemView(item: $vocabList.items[shownCard])
+                } else {
+                    FlashCardView(showReverse: $showCardReverse, item: vocabList.items[shownCard], isCompletionPlaceholder: false)
+                        .transition(.opacity)
+                }
             }
         }
     }
     
-    func showCard(_ item: VocabItem) -> Void {
-        shownCard = item
+    func showCard(_ index: Int) -> Void {
+        shownCard = index
         showCardReverse = true
         
         withAnimation(.linear.speed(5)) {

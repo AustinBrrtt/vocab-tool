@@ -391,11 +391,34 @@ extension Date {
             return "\(days + 1)d"
         }
         
-        // At and above 7 days, round to nearest full day, e.g. 8d
-        if rem < 720 {
-            return "\(days)d"
+        
+        // Under 30 days, round to nearest full day, e.g. 8d
+        if minutes < 43200 {
+            if rem < 720 {
+                return "\(days)d"
+            }
+            return "\(days + 1)d"
         }
-        return "\(days + 1)d"
+        
+        let months = days / 30
+        let mRem = days % 30
+        
+        // Under 1 year, round to nearest full month, e.g. 3M
+        if minutes < 525600 {
+            if mRem < 15 {
+                return "\(months)M"
+            }
+            return "\(months + 1)M"
+        }
+        
+        let years = days / 365
+        let yRem = days % 365
+        
+        // At and above 365 days, round to nearest year. e.g. 3y
+        if yRem < 183 {
+            return "\(years)y"
+        }
+        return "\(years + 1)y"
     }
 }
 

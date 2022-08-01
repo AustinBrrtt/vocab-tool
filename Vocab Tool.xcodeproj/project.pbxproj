@@ -17,6 +17,8 @@
 		D993C8EA28979363009A82E3 /* MasterButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D993C8E928979363009A82E3 /* MasterButtonView.swift */; };
 		D993C8EC289794A2009A82E3 /* ReviewButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D993C8EB289794A2009A82E3 /* ReviewButtonsView.swift */; };
 		D993C8F028979E5D009A82E3 /* FrameSpacer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D993C8EF28979E5D009A82E3 /* FrameSpacer.swift */; };
+		D993C8F42897BD7F009A82E3 /* EditItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D993C8F32897BD7F009A82E3 /* EditItemView.swift */; };
+		D993C8F628982124009A82E3 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D993C8F528982124009A82E3 /* Config.swift */; };
 		D996C65C281E4C6800B82FD8 /* Vocab_ToolApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D996C648281E4C6600B82FD8 /* Vocab_ToolApp.swift */; };
 		D996C65D281E4C6800B82FD8 /* Vocab_ToolApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D996C648281E4C6600B82FD8 /* Vocab_ToolApp.swift */; };
 		D996C65E281E4C6800B82FD8 /* Vocab_ToolDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = D996C649281E4C6600B82FD8 /* Vocab_ToolDocument.swift */; };
@@ -48,6 +50,8 @@
 		D993C8E928979363009A82E3 /* MasterButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterButtonView.swift; sourceTree = "<group>"; };
 		D993C8EB289794A2009A82E3 /* ReviewButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewButtonsView.swift; sourceTree = "<group>"; };
 		D993C8EF28979E5D009A82E3 /* FrameSpacer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameSpacer.swift; sourceTree = "<group>"; };
+		D993C8F32897BD7F009A82E3 /* EditItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItemView.swift; sourceTree = "<group>"; };
+		D993C8F528982124009A82E3 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		D996C648281E4C6600B82FD8 /* Vocab_ToolApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vocab_ToolApp.swift; sourceTree = "<group>"; };
 		D996C649281E4C6600B82FD8 /* Vocab_ToolDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vocab_ToolDocument.swift; sourceTree = "<group>"; };
 		D996C64A281E4C6600B82FD8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -106,6 +110,7 @@
 				D996C649281E4C6600B82FD8 /* Vocab_ToolDocument.swift */,
 				D996C64A281E4C6600B82FD8 /* ContentView.swift */,
 				D996C64B281E4C6800B82FD8 /* Assets.xcassets */,
+				D993C8F528982124009A82E3 /* Config.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -161,6 +166,7 @@
 				D993C8E928979363009A82E3 /* MasterButtonView.swift */,
 				D993C8EB289794A2009A82E3 /* ReviewButtonsView.swift */,
 				D993C8EF28979E5D009A82E3 /* FrameSpacer.swift */,
+				D993C8F32897BD7F009A82E3 /* EditItemView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -297,6 +303,8 @@
 				D996C67A281E694B00B82FD8 /* VocabItemView.swift in Sources */,
 				D94CAF442820D7F900205234 /* StatsView.swift in Sources */,
 				D996C675281E507600B82FD8 /* VocabListView.swift in Sources */,
+				D993C8F42897BD7F009A82E3 /* EditItemView.swift in Sources */,
+				D993C8F628982124009A82E3 /* Config.swift in Sources */,
 				D996C660281E4C6800B82FD8 /* ContentView.swift in Sources */,
 				D993C8E428978B07009A82E3 /* FlashCardObverseView.swift in Sources */,
 				D993C8EC289794A2009A82E3 /* ReviewButtonsView.swift in Sources */,

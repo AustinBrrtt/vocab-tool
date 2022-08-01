@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct VocabItemView: View {
-    let vocabItem: VocabItem
-    let showCard: (VocabItem) -> Void
+    @Binding var vocabItem: VocabItem
+    
+    let index: Int
+    let showCard: (Int) -> Void
+    
     var body: some View {
         HStack {
             Text("\(String(vocabItem.priority)). \(vocabItem.word)")
@@ -27,7 +30,11 @@ struct VocabItemView: View {
             .frame(maxWidth: 75)
         }
         .padding(.vertical)
-        .background(Color.background.opacity(0.01).onTapGesture(perform: { showCard(vocabItem) }))
+        .background(Color.background.opacity(0.01).onTapGesture(perform: doShowCard))
+    }
+    
+    func doShowCard() -> Void {
+        showCard(index)
     }
 }
 
@@ -35,11 +42,11 @@ struct VocabItemView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             List(VocabList.sample.items) { item in
-                VocabItemView(vocabItem: item, showCard: { _ in })
+                VocabItemView(vocabItem: .constant(item), index: 0, showCard: { _ in })
             }
             .padding()
             List(VocabList.sample.items) { item in
-                VocabItemView(vocabItem: item, showCard: { _ in })
+                VocabItemView(vocabItem: .constant(item), index: 1, showCard: { _ in })
             }
             .preferredColorScheme(.dark)
             .padding()

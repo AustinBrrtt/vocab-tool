@@ -33,4 +33,25 @@ struct VocabItem: Codable, Identifiable, Equatable {
     static func ==(lhs: VocabItem, rhs: VocabItem) -> Bool {
         return lhs.id == rhs.id
     }
+    
+    static func nextBreakAndReviewDate(after currentBreak: Int, from date: Date, action: NextBreakAction) -> (Int, Date) {
+        var result: Int = 0
+        
+        switch action {
+        case .reset:
+            result = Config.mistakeReviewTime
+        case .advance:
+            result = Config.reviewTimes.first(where: { t in t > currentBreak }) ?? Config.reviewTimes.last!
+        case .remain:
+            result = currentBreak
+        }
+        
+        return (result, date.add(result, .minute))
+    }
+    
+    enum NextBreakAction {
+        case reset
+        case remain
+        case advance
+    }
 }

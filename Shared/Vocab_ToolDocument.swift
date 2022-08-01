@@ -21,10 +21,6 @@ struct Vocab_ToolDocument: FileDocument {
     var currentCardIsNew = false
     var recentlySeen = Cache<Int>(size: 3)
     
-    // In Minutes:    10m  1h   1d    3d    7d     10d    15d    30d    60d    90d     180d    365d
-    let reviewTimes = [10, 60, 1440, 4320, 10080, 14400, 21600, 43200, 86400, 129600, 259200, 525600]
-    let mistakeReviewTime = 1
-    
     var currentItem: VocabItem {
         hasItem
         ? vocabList.items[reviewIndex]
@@ -89,7 +85,7 @@ extension Vocab_ToolDocument {
         }
         
         // All items in a learning state, sorted by due date, with soonest first
-        let learningItems = vocabList.items.filter({ item in item.state == .learning }).sorted(by: { a, b in a.nextReviewDate! < b.nextReviewDate! })
+        let learningItems = vocabList.items.filter({ item in item.state == .learning }).sorted(by: sortByReviewDate)
         
         // If we have any cards in a learning state and either have already seen them today or have capacity to review a new one, take the one with the soonest due date
         // Additional logic inside this block makes a reasonable effort to avoid the same card appearing repeatedly without other cards appearing in between
@@ -107,7 +103,7 @@ extension Vocab_ToolDocument {
             // However, cards with shorter delays will be preferred still, since they in theory should need the additional focus more than those with longer delays
             let backupCandidateIndices = vocabList.lastStudyDaySeenCards
                 .filter({ idx in vocabList.items[idx].state == .learning })
-                .sorted(by: { a, b in vocabList.items[a].nextReviewDate! < vocabList.items[b].nextReviewDate! })
+                .sorted(by: { a, b in sortByReviewDate(vocabList.items[a], vocabList.items[b]) })
             if let backupIdx = backupCandidateIndices.first(where: { idx in !isSameStudyDay(vocabList.items[idx].nextReviewDate!) }) {
                 reviewIndex = backupIdx
                 isBackupSpacerCard = true
@@ -134,7 +130,14 @@ extension Vocab_ToolDocument {
     
     mutating func reviewItem(success: Bool) -> Int {
         if hasItem {
-            let (nextBreak, date) = nextReviewTime(for: vocabList.items[reviewIndex], success: success)
+            let (nextBreak, date) = VocabItem.nextBreakAndReviewDate(
+                after: vocabList.items[reviewIndex].lastBreak,
+                from: Date(),
+                action: success
+                    ? (isBackupSpacerCard ? .remain : .advance)
+                    : .reset
+            )
+            
             vocabList.items[reviewIndex].lastBreak = nextBreak
             vocabList.items[reviewIndex].state = .learning
             vocabList.items[reviewIndex].nextReviewDate = date
@@ -149,17 +152,6 @@ extension Vocab_ToolDocument {
     
     private func isLastItem(_ item: VocabItem) -> Bool {
         return vocabList.items.firstIndex(of: item) == reviewIndex
-    }
-    
-    private func nextReviewTime(for item: VocabItem, success: Bool) -> (Int, Date) {
-        // On failure, even if not due yet, jump back to beginning and review soon
-        if !success {
-            return (mistakeReviewTime, Date().add(reviewTimes.first!, .minute))
-        }
-        
-        // On success, advance to the next time slot (unless this is a backup card, in which case we'll leave it as is)
-        let result = isBackupSpacerCard ? item.lastBreak : reviewTimes.first(where: { t in t > item.lastBreak }) ?? reviewTimes.last!
-        return (result, Date().add(result, .minute))
     }
     
     private func isSameStudyDay(_ lhs: Date, _ rhs: Date = Date()) -> Bool {
@@ -205,6 +197,21 @@ extension Vocab_ToolDocument {
             vocabList.lastStudyDaySeenCards = []
             vocabList.lastStudyDayNewCardCount = 0
         }
+    }
+    
+    private func sortByReviewDate(_ lhs: VocabItem, _ rhs: VocabItem) -> Bool {
+        if let rightReviewDate = rhs.nextReviewDate {
+            if let leftReviewDate = lhs.nextReviewDate {
+                // Both sides have a nextReviewDate
+                return leftReviewDate < rightReviewDate
+            }
+            
+            // Only lhs has a nextReviewDate
+            return false
+        }
+        
+        // Only rhs has a nextReviewDate, or neither have a nextReviewDate
+        return false
     }
 }
 

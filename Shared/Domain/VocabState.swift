@@ -8,6 +8,8 @@
 import Foundation
 
 enum VocabState: String, Codable {
+    static let all: [VocabState] = [.untouched, .learning, .mastered]
+    
     case untouched = "untouched"
     case learning = "learning"
     case mastered = "mastered"
