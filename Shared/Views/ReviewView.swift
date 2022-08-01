@@ -12,7 +12,7 @@ struct ReviewView: View {
     @Binding var toastMessage: String
     @Binding var toastColor: Color
     @State var showPronunciation = false
-    @State var showMeaning = false
+    @State var showReverse = false
     @State var lastReviewDate = Date()
     
     var isCompletionPlaceholder: Bool {
@@ -21,104 +21,28 @@ struct ReviewView: View {
     
     var body: some View {
         VStack {
-            if showMeaning {
-                // Back of card
-                HStack {
-                    Button(action: master) {
-                        Label("Mark as Perfected", systemImage: "star.fill")
-                            .foregroundColor(.background)
-                            .font(.headline)
-                            .padding(.horizontal, 10)
-                            .padding(.vertical, 5)
-                            .background(Color.yellow)
-                            .cornerRadius(5)
-                    }
-                    .padding(.leading)
-                    Spacer()
-                    Text("#\(document.currentItem.priority)")
-                        .font(.headline)
-                        .padding()
-                }
-                Text(document.currentItem.word)
-                    .font(.largeTitle)
-                    .padding(.vertical)
-                if let pronunciation = document.currentItem.pronunciation {
-                    Text(pronunciation)
-                        .foregroundColor(.secondary)
-                        .padding(8)
-                        .overlay(RoundedRectangle(cornerRadius: 5).stroke(Color.secondary))
+            HStack {
+                if showReverse {
+                    MasterButtonView(master: master)
                 }
                 Spacer()
-                Text(document.currentItem.meaning)
-                    .font(.largeTitle)
-                    .padding(.vertical)
-                    .onTapGesture(perform: toggleMeaning)
-                Spacer()
-                Spacer()
-                HStack(spacing: 1.5) {
-                    Button(action: {
-                        review(success: false)
-                    }) {
-                        HStack {
-                            Spacer()
-                            Image(systemName: "multiply")
-                                .foregroundColor(.white)
-                                .frame(width: 80, height: 80)
-                            Spacer()
-                        }
-                        .padding(.vertical)
-                    }
-                    .background(Color.red)
-                    .ignoresSafeArea()
-                    
-                    Button(action: {
-                        review(success: true)
-                    }) {
-                        HStack {
-                            Spacer()
-                            Image(systemName: "checkmark")
-                                .foregroundColor(.white)
-                                .frame(width: 80, height: 80)
-                            Spacer()
-                        }
-                        .padding(.vertical)
-                    }
-                    .background(Color.green)
-                    .ignoresSafeArea()
-                }
-                .padding(.top, 1.5)
-                .background(Color.primary)
-                .font(.system(size: 80))
-                .ignoresSafeArea()
-            } else {
-                // Front of card
-                Spacer()
-                Text(document.currentItem.word)
-                    .onTapGesture(perform: toggleMeaning)
-                    .font(.largeTitle)
-                if let pronunciation = document.currentItem.pronunciation {
-                    Text(isCompletionPlaceholder || showPronunciation ? pronunciation : "Tap to reveal pronunciation")
-                        .multilineTextAlignment(.center)
-                        .foregroundColor(.secondary)
-                        .padding(8)
-                        .overlay(RoundedRectangle(cornerRadius: 5).stroke(Color.secondary))
-                        .padding(.bottom, 40)
-                        .padding(.top, 20)
-                        .padding(.horizontal, 40) // Make it easier to tap
-                        .background(Color.background)
-                        .padding(.top, -20)
-                        .onTapGesture {
-                            showPronunciation = !showPronunciation
-                        }
-                }
-                Spacer()
-                
-                HStack{
-                    Spacer()
+            }
+            .frame(height: 50)
+            
+            Spacer(minLength: 1)
+            
+            FlashCardView(showReverse: $showReverse, item: document.currentItem, isCompletionPlaceholder: isCompletionPlaceholder, onCardFlip: onCardFlip)
+            
+            Spacer(minLength: 1)
+            
+            HStack {
+                if showReverse {
+                    ReviewButtonsView(review: review)
                 }
             }
+            .frame(height: 100)
         }
-        .background(Color.background.onTapGesture(perform: toggleMeaning))
+        .background(.regularMaterial)
         .navigationTitle("Study")
     }
     
@@ -138,7 +62,7 @@ struct ReviewView: View {
         }
     }
     
-    func review(success: Bool) -> Void {
+    func review(_ success: Bool) -> Void {
         lastReviewDate = Date()
         let delay = document.reviewItem(success: success)
         toastColor = success ? .green : .red
@@ -156,18 +80,21 @@ struct ReviewView: View {
     
     func reset() -> Void {
         showPronunciation = false
-        showMeaning = false
+        showReverse = false
     }
     
-    func toggleMeaning() {
+    func toggleMeaning() -> Void {
+        showReverse = !showReverse // TODO
+        onCardFlip()
+    }
+    
+    func onCardFlip() -> Void {
         if isCompletionPlaceholder {
             // On tap, check if it's a new day, in which case new words may be available
             if !lastReviewDate.isSameDay(as: Date()) {
                 lastReviewDate = Date()
                 document.nextItem()
             }
-        } else {
-            showMeaning = !showMeaning
         }
     }
 }

@@ -8,6 +8,8 @@
 import Foundation
 
 struct VocabItem: Codable, Identifiable, Equatable {
+    static let placeholderItem: VocabItem = VocabItem(word: "Studying Complete", pronunciation: "You have completed your studying for today", meaning: "", priority: -1, lastBreak: 0, state: .mastered)
+    
     var id: UUID = UUID()
     var word: String
     var pronunciation: String?

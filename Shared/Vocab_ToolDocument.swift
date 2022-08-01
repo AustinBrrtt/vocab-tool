@@ -28,7 +28,7 @@ struct Vocab_ToolDocument: FileDocument {
     var currentItem: VocabItem {
         hasItem
         ? vocabList.items[reviewIndex]
-        : VocabItem(word: "Studying Complete", pronunciation: "You have completed your studying for today", meaning: "", priority: -1, lastBreak: 0, state: .mastered)
+        : VocabItem.placeholderItem
     }
 
     init(list: VocabList = VocabList(items: [], lastStudyDate: Date(), lastStudyDaySeenCards: Set(), lastStudyDayNewCardCount: 0, maxNewCardsPerDay: 10, maxReviewsPerDay: 40)) { // TODO: Default Sample List for New Documents

@@ -8,40 +8,26 @@
 import SwiftUI
 
 struct VocabItemView: View {
-    var vocabItem: VocabItem
-    @State var showMeaning = false
-    @State var showPronunciation = false
-    
-    var leftText: String {
-        if (!showPronunciation || vocabItem.pronunciation == nil) {
-            return "\(vocabItem.priority). \(vocabItem.word)"
-        }
-        return "\(vocabItem.priority). \(vocabItem.word) (\(vocabItem.pronunciation!))"
-    }
-    
-    var rightText: String {
-        return showMeaning ? vocabItem.meaning : "Tap to Reveal"
-    }
-    
+    let vocabItem: VocabItem
+    let showCard: (VocabItem) -> Void
     var body: some View {
         HStack {
-            Text(leftText)
-                .onTapGesture {
-                    showPronunciation = !showPronunciation
-                }
-            Spacer()
-            if vocabItem.state == .learning {
-                Text(Date.minutesToShortText(minutes: vocabItem.lastBreak))
-                    .foregroundColor(.secondary)
-                Spacer()
-            }
-            Text(rightText)
-                .onTapGesture {
-                    showMeaning = !showMeaning
-                }
+            Text("\(String(vocabItem.priority)). \(vocabItem.word)")
             
-            StateIcon(state: vocabItem.state)
-        }.padding(.vertical)
+            Spacer(minLength: 10)
+            
+            HStack {
+                if vocabItem.state == .learning {
+                    Text(Date.minutesToShortText(minutes: vocabItem.lastBreak))
+                        .foregroundColor(.secondary)
+                }
+                Spacer()
+                StateIcon(state: vocabItem.state)
+            }
+            .frame(maxWidth: 75)
+        }
+        .padding(.vertical)
+        .background(Color.background.opacity(0.01).onTapGesture(perform: { showCard(vocabItem) }))
     }
 }
 
@@ -49,11 +35,11 @@ struct VocabItemView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             List(VocabList.sample.items) { item in
-                VocabItemView(vocabItem: item)
+                VocabItemView(vocabItem: item, showCard: { _ in })
             }
             .padding()
             List(VocabList.sample.items) { item in
-                VocabItemView(vocabItem: item)
+                VocabItemView(vocabItem: item, showCard: { _ in })
             }
             .preferredColorScheme(.dark)
             .padding()

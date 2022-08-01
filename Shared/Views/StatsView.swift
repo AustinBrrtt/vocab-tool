@@ -33,6 +33,7 @@ struct StatsView: View {
             Spacer()
         }
         .padding(.horizontal, 40)
+        .background(.regularMaterial)
         .navigationTitle("Statistics")
         .navigationBarTitleDisplayMode(.inline)
     }

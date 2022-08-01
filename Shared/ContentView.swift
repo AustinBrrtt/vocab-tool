@@ -25,6 +25,7 @@ struct ContentView: View {
                             }
                         }
                     }
+                    .navigationBarTitleDisplayMode(.inline)
             }
             VStack {
                 if showToast {

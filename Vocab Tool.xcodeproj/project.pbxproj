@@ -11,6 +11,12 @@
 		D94CAF42281F9CC400205234 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94CAF41281F9CC400205234 /* ColorExtensions.swift */; };
 		D94CAF442820D7F900205234 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94CAF432820D7F900205234 /* StatsView.swift */; };
 		D94CAF462821C74F00205234 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94CAF452821C74F00205234 /* Cache.swift */; };
+		D993C8E428978B07009A82E3 /* FlashCardObverseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D993C8E328978B07009A82E3 /* FlashCardObverseView.swift */; };
+		D993C8E628978B16009A82E3 /* FlashCardReverseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D993C8E528978B16009A82E3 /* FlashCardReverseView.swift */; };
+		D993C8E828978B50009A82E3 /* FlashCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D993C8E728978B50009A82E3 /* FlashCardView.swift */; };
+		D993C8EA28979363009A82E3 /* MasterButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D993C8E928979363009A82E3 /* MasterButtonView.swift */; };
+		D993C8EC289794A2009A82E3 /* ReviewButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D993C8EB289794A2009A82E3 /* ReviewButtonsView.swift */; };
+		D993C8F028979E5D009A82E3 /* FrameSpacer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D993C8EF28979E5D009A82E3 /* FrameSpacer.swift */; };
 		D996C65C281E4C6800B82FD8 /* Vocab_ToolApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D996C648281E4C6600B82FD8 /* Vocab_ToolApp.swift */; };
 		D996C65D281E4C6800B82FD8 /* Vocab_ToolApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D996C648281E4C6600B82FD8 /* Vocab_ToolApp.swift */; };
 		D996C65E281E4C6800B82FD8 /* Vocab_ToolDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = D996C649281E4C6600B82FD8 /* Vocab_ToolDocument.swift */; };
@@ -36,6 +42,12 @@
 		D94CAF41281F9CC400205234 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		D94CAF432820D7F900205234 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 		D94CAF452821C74F00205234 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
+		D993C8E328978B07009A82E3 /* FlashCardObverseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardObverseView.swift; sourceTree = "<group>"; };
+		D993C8E528978B16009A82E3 /* FlashCardReverseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardReverseView.swift; sourceTree = "<group>"; };
+		D993C8E728978B50009A82E3 /* FlashCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardView.swift; sourceTree = "<group>"; };
+		D993C8E928979363009A82E3 /* MasterButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterButtonView.swift; sourceTree = "<group>"; };
+		D993C8EB289794A2009A82E3 /* ReviewButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewButtonsView.swift; sourceTree = "<group>"; };
+		D993C8EF28979E5D009A82E3 /* FrameSpacer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameSpacer.swift; sourceTree = "<group>"; };
 		D996C648281E4C6600B82FD8 /* Vocab_ToolApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vocab_ToolApp.swift; sourceTree = "<group>"; };
 		D996C649281E4C6600B82FD8 /* Vocab_ToolDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vocab_ToolDocument.swift; sourceTree = "<group>"; };
 		D996C64A281E4C6600B82FD8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -143,6 +155,12 @@
 				D9E04C97281F120500B7251C /* ReviewView.swift */,
 				D94CAF3F281F952D00205234 /* StateIcon.swift */,
 				D94CAF432820D7F900205234 /* StatsView.swift */,
+				D993C8E328978B07009A82E3 /* FlashCardObverseView.swift */,
+				D993C8E528978B16009A82E3 /* FlashCardReverseView.swift */,
+				D993C8E728978B50009A82E3 /* FlashCardView.swift */,
+				D993C8E928979363009A82E3 /* MasterButtonView.swift */,
+				D993C8EB289794A2009A82E3 /* ReviewButtonsView.swift */,
+				D993C8EF28979E5D009A82E3 /* FrameSpacer.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -265,17 +283,23 @@
 				D9E04C98281F120500B7251C /* ReviewView.swift in Sources */,
 				D996C65E281E4C6800B82FD8 /* Vocab_ToolDocument.swift in Sources */,
 				D94CAF40281F952D00205234 /* StateIcon.swift in Sources */,
+				D993C8E828978B50009A82E3 /* FlashCardView.swift in Sources */,
 				D996C678281E588200B82FD8 /* VocabListPreviewData.swift in Sources */,
 				D996C670281E4E5D00B82FD8 /* VocabItem.swift in Sources */,
+				D993C8E628978B16009A82E3 /* FlashCardReverseView.swift in Sources */,
 				D9E04C9F281F1A7F00B7251C /* DateExtensions.swift in Sources */,
 				D996C66E281E4E3900B82FD8 /* VocabList.swift in Sources */,
 				D996C672281E4EA200B82FD8 /* VocabState.swift in Sources */,
 				D996C65C281E4C6800B82FD8 /* Vocab_ToolApp.swift in Sources */,
 				D94CAF462821C74F00205234 /* Cache.swift in Sources */,
+				D993C8F028979E5D009A82E3 /* FrameSpacer.swift in Sources */,
+				D993C8EA28979363009A82E3 /* MasterButtonView.swift in Sources */,
 				D996C67A281E694B00B82FD8 /* VocabItemView.swift in Sources */,
 				D94CAF442820D7F900205234 /* StatsView.swift in Sources */,
 				D996C675281E507600B82FD8 /* VocabListView.swift in Sources */,
 				D996C660281E4C6800B82FD8 /* ContentView.swift in Sources */,
+				D993C8E428978B07009A82E3 /* FlashCardObverseView.swift in Sources */,
+				D993C8EC289794A2009A82E3 /* ReviewButtonsView.swift in Sources */,
 				D94CAF42281F9CC400205234 /* ColorExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
