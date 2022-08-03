@@ -43,7 +43,7 @@ struct ReviewButtonsView: View {
             .ignoresSafeArea()
         }
         .padding(.top, 1.5)
-        .background(Color.primary)
+        .background(.regularMaterial)
         .font(.system(size: 80))
         .ignoresSafeArea()
     }
@@ -51,6 +51,17 @@ struct ReviewButtonsView: View {
 
 struct ReviewButtonsView_Previews: PreviewProvider {
     static var previews: some View {
-        ReviewButtonsView(review: { _ in })
+        VStack {
+            Spacer()
+            ReviewButtonsView(review: { _ in })
+        }
+        .background(.regularMaterial)
+        
+        VStack {
+            Spacer()
+            ReviewButtonsView(review: { _ in })
+        }
+        .background(.regularMaterial)
+        .preferredColorScheme(.dark)
     }
 }
