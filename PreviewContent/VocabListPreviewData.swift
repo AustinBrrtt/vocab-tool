@@ -17,7 +17,7 @@ extension VocabList {
         VocabItem(word: "怪しい", pronunciation: "あやしい", meaning: "suspicious,\ndubious", priority: 6, lastBreak: 0, state: .untouched),
         VocabItem(word: "donna", meaning: "woman", priority: 5, lastBreak: 7, state: .untouched),
         VocabItem(word: "スーパーマーケット", meaning: "supermarket", priority: 1546, lastBreak: 0, state: .learning, nextReviewDate: Date().add(-1, .day)),
-        VocabItem(word: "ドドドドドドドドドドド", pronunciation: "あたためる, あっためる", meaning: "capability,\nperformance ability of machine", priority: 2546, lastBreak: 0, state: .learning, nextReviewDate: Date().add(-1, .day)),
+        VocabItem(word: "ドドドドドドドドドドド", pronunciation: "ゴゴゴゴゴゴゴゴゴゴゴゴゴゴゴ", meaning: "menacing,\nlike when Dio Brando looks at you", priority: 2546, lastBreak: 0, state: .learning, nextReviewDate: Date().add(-1, .day)),
         VocabItem(word: "ごみ", meaning: "trash", priority: 8, lastBreak: 0, state: .mastered),
         VocabItem(word: "自炊", pronunciation: "じすい", meaning: "cooking", priority: 9, lastBreak: 0, state: .mastered)
     ], lastStudyDate: Date(), lastStudyDaySeenCards: [], lastStudyDayNewCardCount: 0, maxNewCardsPerDay: 10, maxReviewsPerDay: 40)

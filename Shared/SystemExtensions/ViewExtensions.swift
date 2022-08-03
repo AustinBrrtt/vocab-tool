@@ -13,7 +13,7 @@ extension View {
     }
     
     func asCard(height: CGFloat = 500, onBackgroundTap: @escaping () -> Void = {}) -> some View {
-        padding(.horizontal, 2)
+        padding(.horizontal, 5)
             .frame(height: height)
             .background(
                 Rectangle()
@@ -23,8 +23,18 @@ extension View {
             .cornerRadius(20)
             .shadow(radius: 4)
             .padding()
-            .transaction { t in
-                t.animation = nil // The card itself can be given a transition in context. Nested transitions can cause buggy-looking behavior.
-            }
+//            .transaction { t in
+//                t.animation = nil // The card itself can be given a transition in context. Nested transitions can cause buggy-looking behavior.
+//            }
+    }
+    
+    func transitionSuddenly(delay: Double?) -> some View {
+        var animation: Animation = .linear(duration: 0.01)
+        
+        if let delay = delay {
+            animation = animation.delay(delay)
+        }
+                                                   
+        return transition(.opacity.animation(animation))
     }
 }

@@ -9,10 +9,10 @@ import SwiftUI
 
 struct FlashCardPickerPreview: View {
     @State var index: Int = 0
-    @State var showReverse: Bool
+    @State var rotation: Double
     
     init(showReverse: Bool = false) {
-        _showReverse = State<Bool>(initialValue: showReverse)
+        _rotation = State<Double>(initialValue: showReverse ? 180 : 0)
     }
     
     var body: some View {
@@ -24,7 +24,7 @@ struct FlashCardPickerPreview: View {
             }
             .pickerStyle(.wheel)
             
-            FlashCardView(showReverse: $showReverse, item:
+            FlashCardView(rotation: $rotation, item:
                             VocabList.sample.items[index], isCompletionPlaceholder: false)
         }
     }

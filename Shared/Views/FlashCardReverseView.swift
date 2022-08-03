@@ -54,5 +54,6 @@ struct FlashCardReverseView: View {
 struct FlashCardReverseView_Previews: PreviewProvider {
     static var previews: some View {
         FlashCardPickerPreview(showReverse: true)
+        FlashCardView(rotation: .constant(180), item: VocabItem.placeholderItem, isCompletionPlaceholder: true)
     }
 }

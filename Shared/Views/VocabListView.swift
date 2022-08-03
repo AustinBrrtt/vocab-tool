@@ -13,7 +13,7 @@ struct VocabListView: View {
     @Binding var vocabList: VocabList
     @State var shownCard: Int = 0
     @State var cardShown: Bool = false
-    @State var showCardReverse: Bool = true
+    @State var cardRotation: Double = 0
     
     var isEditMode: Bool {
         return editMode?.wrappedValue.isEditing ?? false
@@ -82,7 +82,7 @@ struct VocabListView: View {
                     EditItemView(item: $vocabList.items[shownCard])
                         .asCard()
                 } else {
-                    FlashCardView(showReverse: $showCardReverse, item: vocabList.items[shownCard], isCompletionPlaceholder: false)
+                    FlashCardView(rotation: $cardRotation, item: vocabList.items[shownCard], isCompletionPlaceholder: false)
                         .transition(.opacity)
                 }
             }
@@ -91,7 +91,7 @@ struct VocabListView: View {
     
     func showCard(_ index: Int) -> Void {
         shownCard = index
-        showCardReverse = true
+        cardRotation = 180
         
         withAnimation(.linear.speed(5)) {
             cardShown = true

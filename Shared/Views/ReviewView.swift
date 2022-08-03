@@ -12,7 +12,7 @@ struct ReviewView: View {
     @Binding var toastMessage: String
     @Binding var toastColor: Color
     @State var showPronunciation = false
-    @State var showReverse = false
+    @State var cardRotation: Double = 0
     @State var lastReviewDate = Date()
     
     var isCompletionPlaceholder: Bool {
@@ -22,7 +22,7 @@ struct ReviewView: View {
     var body: some View {
         VStack {
             HStack {
-                if showReverse {
+                if cardRotation == 180 {
                     MasterButtonView(master: master)
                 }
                 Spacer()
@@ -31,12 +31,12 @@ struct ReviewView: View {
             
             Spacer(minLength: 1)
             
-            FlashCardView(showReverse: $showReverse, item: document.currentItem, isCompletionPlaceholder: isCompletionPlaceholder, onCardFlip: onCardFlip)
+            FlashCardView(rotation: $cardRotation, item: document.currentItem, isCompletionPlaceholder: isCompletionPlaceholder, onCardFlip: onCardFlip)
             
             Spacer(minLength: 1)
             
             HStack {
-                if showReverse {
+                if cardRotation == 180 {
                     ReviewButtonsView(review: review)
                 }
             }
@@ -80,12 +80,7 @@ struct ReviewView: View {
     
     func reset() -> Void {
         showPronunciation = false
-        showReverse = false
-    }
-    
-    func toggleMeaning() -> Void {
-        showReverse = !showReverse // TODO
-        onCardFlip()
+        cardRotation = 0
     }
     
     func onCardFlip() -> Void {
