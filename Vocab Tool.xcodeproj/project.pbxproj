@@ -24,13 +24,9 @@
 		D993C8FC28983BB1009A82E3 /* NewItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D993C8FB28983BB1009A82E3 /* NewItemView.swift */; };
 		D993C90628986BF1009A82E3 /* SearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D993C90528986BF1009A82E3 /* SearchResults.swift */; };
 		D996C65C281E4C6800B82FD8 /* Vocab_ToolApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D996C648281E4C6600B82FD8 /* Vocab_ToolApp.swift */; };
-		D996C65D281E4C6800B82FD8 /* Vocab_ToolApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D996C648281E4C6600B82FD8 /* Vocab_ToolApp.swift */; };
 		D996C65E281E4C6800B82FD8 /* Vocab_ToolDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = D996C649281E4C6600B82FD8 /* Vocab_ToolDocument.swift */; };
-		D996C65F281E4C6800B82FD8 /* Vocab_ToolDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = D996C649281E4C6600B82FD8 /* Vocab_ToolDocument.swift */; };
 		D996C660281E4C6800B82FD8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D996C64A281E4C6600B82FD8 /* ContentView.swift */; };
-		D996C661281E4C6800B82FD8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D996C64A281E4C6600B82FD8 /* ContentView.swift */; };
 		D996C662281E4C6800B82FD8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D996C64B281E4C6800B82FD8 /* Assets.xcassets */; };
-		D996C663281E4C6800B82FD8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D996C64B281E4C6800B82FD8 /* Assets.xcassets */; };
 		D996C66E281E4E3900B82FD8 /* VocabList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D996C66D281E4E3900B82FD8 /* VocabList.swift */; };
 		D996C670281E4E5D00B82FD8 /* VocabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D996C66F281E4E5D00B82FD8 /* VocabItem.swift */; };
 		D996C672281E4EA200B82FD8 /* VocabState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D996C671281E4EA200B82FD8 /* VocabState.swift */; };
@@ -38,9 +34,7 @@
 		D996C678281E588200B82FD8 /* VocabListPreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D996C677281E588200B82FD8 /* VocabListPreviewData.swift */; };
 		D996C67A281E694B00B82FD8 /* VocabItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D996C679281E694B00B82FD8 /* VocabItemView.swift */; };
 		D9E04C98281F120500B7251C /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E04C97281F120500B7251C /* ReviewView.swift */; };
-		D9E04C99281F120500B7251C /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E04C97281F120500B7251C /* ReviewView.swift */; };
 		D9E04C9F281F1A7F00B7251C /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E04C9E281F1A7F00B7251C /* DateExtensions.swift */; };
-		D9E04CA0281F1A7F00B7251C /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E04C9E281F1A7F00B7251C /* DateExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,7 +60,6 @@
 		D996C64B281E4C6800B82FD8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D996C650281E4C6800B82FD8 /* Vocab Tool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Vocab Tool.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D996C653281E4C6800B82FD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D996C658281E4C6800B82FD8 /* Vocab Tool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Vocab Tool.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D996C65A281E4C6800B82FD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D996C65B281E4C6800B82FD8 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
 		D996C66D281E4E3900B82FD8 /* VocabList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabList.swift; sourceTree = "<group>"; };
@@ -81,13 +74,6 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		D996C64D281E4C6800B82FD8 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D996C655281E4C6800B82FD8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -127,7 +113,6 @@
 			isa = PBXGroup;
 			children = (
 				D996C650281E4C6800B82FD8 /* Vocab Tool.app */,
-				D996C658281E4C6800B82FD8 /* Vocab Tool.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -220,23 +205,6 @@
 			productReference = D996C650281E4C6800B82FD8 /* Vocab Tool.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D996C657281E4C6800B82FD8 /* Vocab Tool (macOS) */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D996C669281E4C6800B82FD8 /* Build configuration list for PBXNativeTarget "Vocab Tool (macOS)" */;
-			buildPhases = (
-				D996C654281E4C6800B82FD8 /* Sources */,
-				D996C655281E4C6800B82FD8 /* Frameworks */,
-				D996C656281E4C6800B82FD8 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Vocab Tool (macOS)";
-			productName = "Vocab Tool (macOS)";
-			productReference = D996C658281E4C6800B82FD8 /* Vocab Tool.app */;
-			productType = "com.apple.product-type.application";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -248,9 +216,6 @@
 				LastUpgradeCheck = 1330;
 				TargetAttributes = {
 					D996C64F281E4C6800B82FD8 = {
-						CreatedOnToolsVersion = 13.3.1;
-					};
-					D996C657281E4C6800B82FD8 = {
 						CreatedOnToolsVersion = 13.3.1;
 					};
 				};
@@ -269,7 +234,6 @@
 			projectRoot = "";
 			targets = (
 				D996C64F281E4C6800B82FD8 /* Vocab Tool (iOS) */,
-				D996C657281E4C6800B82FD8 /* Vocab Tool (macOS) */,
 			);
 		};
 /* End PBXProject section */
@@ -280,14 +244,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D996C662281E4C6800B82FD8 /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D996C656281E4C6800B82FD8 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D996C663281E4C6800B82FD8 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,18 +281,6 @@
 				D993C8EC289794A2009A82E3 /* ReviewButtonsView.swift in Sources */,
 				D993C90628986BF1009A82E3 /* SearchResults.swift in Sources */,
 				D94CAF42281F9CC400205234 /* ColorExtensions.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D996C654281E4C6800B82FD8 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D9E04C99281F120500B7251C /* ReviewView.swift in Sources */,
-				D996C65F281E4C6800B82FD8 /* Vocab_ToolDocument.swift in Sources */,
-				D996C65D281E4C6800B82FD8 /* Vocab_ToolApp.swift in Sources */,
-				D996C661281E4C6800B82FD8 /* ContentView.swift in Sources */,
-				D9E04CA0281F1A7F00B7251C /* DateExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,66 +473,6 @@
 			};
 			name = Release;
 		};
-		D996C66A281E4C6800B82FD8 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = PreviewContent;
-				DEVELOPMENT_TEAM = SJ2JB357J3;
-				ENABLE_HARDENED_RUNTIME = YES;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = macOS/Info.plist;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 12.4;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "io.austinbarrett.Vocab-Tool";
-				PRODUCT_NAME = "Vocab Tool";
-				SDKROOT = macosx;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		D996C66B281E4C6800B82FD8 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = PreviewContent;
-				DEVELOPMENT_TEAM = SJ2JB357J3;
-				ENABLE_HARDENED_RUNTIME = YES;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = macOS/Info.plist;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 12.4;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "io.austinbarrett.Vocab-Tool";
-				PRODUCT_NAME = "Vocab Tool";
-				SDKROOT = macosx;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -606,15 +490,6 @@
 			buildConfigurations = (
 				D996C667281E4C6800B82FD8 /* Debug */,
 				D996C668281E4C6800B82FD8 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D996C669281E4C6800B82FD8 /* Build configuration list for PBXNativeTarget "Vocab Tool (macOS)" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D996C66A281E4C6800B82FD8 /* Debug */,
-				D996C66B281E4C6800B82FD8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

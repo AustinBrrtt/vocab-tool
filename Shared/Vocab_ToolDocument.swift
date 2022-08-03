@@ -147,7 +147,10 @@ extension Vocab_ToolDocument {
     }
     
     private func haveSeenRecently(_ item: VocabItem) -> Bool {
-        return recentlySeen.contains(vocabList.items.firstIndex(of: item) ?? -1)
+        guard let index = vocabList.items.firstIndex(of: item) else {
+            return false
+        }
+        return recentlySeen.contains(index)
     }
     
     private func isLastItem(_ item: VocabItem) -> Bool {
@@ -166,7 +169,10 @@ extension Vocab_ToolDocument {
     private func firstReviewableItem(from items: [VocabItem]) -> (VocabItem, Bool)? {
         var acceptableItem: VocabItem? // Technically can be used, but was seen recently.
         for item in items {
-            if isSameStudyDay(item.nextReviewDate!) && (vocabList.lastStudyDaySeenCards.count < vocabList.maxTotalCardsPerDay || vocabList.lastStudyDaySeenCards.contains(vocabList.items.firstIndex(of: item) ?? -42)) {
+            if let nextReviewDate = item.nextReviewDate, isSameStudyDay(nextReviewDate) && (
+                vocabList.lastStudyDaySeenCards.count < vocabList.maxTotalCardsPerDay ||
+                vocabList.lastStudyDaySeenCards.contains(vocabList.items.firstIndex(of: item) ?? -42)
+            ) {
                 if !haveSeenRecently(item) {
                     return (item, false)
                 } else if acceptableItem == nil || isLastItem(acceptableItem!) {

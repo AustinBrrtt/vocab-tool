@@ -36,6 +36,7 @@ struct SearchResults: View {
 //                .background(.regularMaterial)
 //                .edgesIgnoringSafeArea(.all)
         }
+        .scrollContentBackground(.hidden)
         .background(.regularMaterial)
         .listStyle(.grouped)
     }
