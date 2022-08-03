@@ -23,9 +23,6 @@ extension View {
             .cornerRadius(20)
             .shadow(radius: 4)
             .padding()
-//            .transaction { t in
-//                t.animation = nil // The card itself can be given a transition in context. Nested transitions can cause buggy-looking behavior.
-//            }
     }
     
     func transitionSuddenly(delay: Double?) -> some View {
@@ -36,5 +33,13 @@ extension View {
         }
                                                    
         return transition(.opacity.animation(animation))
+    }
+    
+    func show(if condition: Bool) -> some View {
+        if condition {
+            return AnyView(self)
+        } else {
+            return AnyView(EmptyView())
+        }
     }
 }

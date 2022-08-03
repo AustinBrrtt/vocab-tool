@@ -14,6 +14,7 @@ struct ReviewView: View {
     @State var showPronunciation = false
     @State var cardRotation: Double = 0
     @State var lastReviewDate = Date()
+    @State var showCard = true
     
     var isCompletionPlaceholder: Bool {
         return document.currentItem.state == .mastered
@@ -24,6 +25,7 @@ struct ReviewView: View {
             HStack {
                 if cardRotation == 180 {
                     MasterButtonView(master: master)
+                        .transition(buttonTransition(.leading))
                 }
                 Spacer()
             }
@@ -31,13 +33,17 @@ struct ReviewView: View {
             
             Spacer(minLength: 1)
             
-            FlashCardView(rotation: $cardRotation, item: document.currentItem, isCompletionPlaceholder: isCompletionPlaceholder, onCardFlip: onCardFlip)
+            if showCard {
+                FlashCardView(rotation: $cardRotation, item: document.currentItem, isCompletionPlaceholder: isCompletionPlaceholder, onCardFlip: onCardFlip)
+                    .transition(.asymmetric(insertion: .slide, removal: .move(edge: .trailing)))
+            }
             
             Spacer(minLength: 1)
             
             HStack {
                 if cardRotation == 180 {
                     ReviewButtonsView(review: review)
+                        .transition(buttonTransition(.bottom))
                 }
             }
             .frame(height: 100)
@@ -57,8 +63,7 @@ struct ReviewView: View {
         // Need slight delay so change is detected separately
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             toastMessage = "Mastered \(document.currentItem.word)"
-            reset()
-            document.nextItem()
+            showNextCard()
         }
     }
     
@@ -73,14 +78,26 @@ struct ReviewView: View {
         // Need slight delay so change is detected separately
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             toastMessage = "+\(Date.minutesToShortText(minutes: delay))"
-            reset()
-            document.nextItem()
+            showNextCard()
         }
     }
     
-    func reset() -> Void {
-        showPronunciation = false
-        cardRotation = 0
+    func showNextCard() -> Void {
+        let transitionTime = 0.1
+        let pauseTime = 0.2
+        withAnimation(.linear(duration: transitionTime)) {
+            showCard = false
+        }
+        
+        withAnimation(.linear(duration: pauseTime / 3).delay(transitionTime + pauseTime / 3)) {
+            showPronunciation = false
+            cardRotation = 0
+            document.nextItem()
+        }
+        
+        withAnimation(.linear(duration: transitionTime).delay(transitionTime + pauseTime)) {
+            showCard = true
+        }
     }
     
     func onCardFlip() -> Void {
@@ -88,9 +105,12 @@ struct ReviewView: View {
             // On tap, check if it's a new day, in which case new words may be available
             if !lastReviewDate.isSameDay(as: Date()) {
                 lastReviewDate = Date()
-                document.nextItem()
             }
         }
+    }
+    
+    func buttonTransition(_ edge: Edge) -> AnyTransition {
+        return .asymmetric(insertion: .opacity, removal: .move(edge: edge))
     }
 }
 
