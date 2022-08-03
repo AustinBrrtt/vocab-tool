@@ -11,6 +11,7 @@
 		D94CAF42281F9CC400205234 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94CAF41281F9CC400205234 /* ColorExtensions.swift */; };
 		D94CAF442820D7F900205234 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94CAF432820D7F900205234 /* StatsView.swift */; };
 		D94CAF462821C74F00205234 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94CAF452821C74F00205234 /* Cache.swift */; };
+		D95B01D6289B14A900DB4C5D /* MirroredTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95B01D5289B14A900DB4C5D /* MirroredTextField.swift */; };
 		D993C8E428978B07009A82E3 /* FlashCardObverseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D993C8E328978B07009A82E3 /* FlashCardObverseView.swift */; };
 		D993C8E628978B16009A82E3 /* FlashCardReverseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D993C8E528978B16009A82E3 /* FlashCardReverseView.swift */; };
 		D993C8E828978B50009A82E3 /* FlashCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D993C8E728978B50009A82E3 /* FlashCardView.swift */; };
@@ -42,6 +43,7 @@
 		D94CAF41281F9CC400205234 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		D94CAF432820D7F900205234 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 		D94CAF452821C74F00205234 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
+		D95B01D5289B14A900DB4C5D /* MirroredTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirroredTextField.swift; sourceTree = "<group>"; };
 		D993C8E328978B07009A82E3 /* FlashCardObverseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardObverseView.swift; sourceTree = "<group>"; };
 		D993C8E528978B16009A82E3 /* FlashCardReverseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardReverseView.swift; sourceTree = "<group>"; };
 		D993C8E728978B50009A82E3 /* FlashCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashCardView.swift; sourceTree = "<group>"; };
@@ -83,6 +85,56 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D95B01D0289B141C00DB4C5D /* Form */ = {
+			isa = PBXGroup;
+			children = (
+				D993C8F32897BD7F009A82E3 /* EditItemView.swift */,
+				D993C8FB28983BB1009A82E3 /* NewItemView.swift */,
+				D95B01D5289B14A900DB4C5D /* MirroredTextField.swift */,
+			);
+			path = Form;
+			sourceTree = "<group>";
+		};
+		D95B01D1289B142400DB4C5D /* FlashCard */ = {
+			isa = PBXGroup;
+			children = (
+				D993C8E328978B07009A82E3 /* FlashCardObverseView.swift */,
+				D993C8E528978B16009A82E3 /* FlashCardReverseView.swift */,
+				D993C8E728978B50009A82E3 /* FlashCardView.swift */,
+			);
+			path = FlashCard;
+			sourceTree = "<group>";
+		};
+		D95B01D2289B144100DB4C5D /* VocabList */ = {
+			isa = PBXGroup;
+			children = (
+				D94CAF432820D7F900205234 /* StatsView.swift */,
+				D996C674281E507600B82FD8 /* VocabListView.swift */,
+				D996C679281E694B00B82FD8 /* VocabItemView.swift */,
+				D993C90528986BF1009A82E3 /* SearchResults.swift */,
+			);
+			path = VocabList;
+			sourceTree = "<group>";
+		};
+		D95B01D3289B146500DB4C5D /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				D993C8EF28979E5D009A82E3 /* FrameSpacer.swift */,
+				D94CAF3F281F952D00205234 /* StateIcon.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		D95B01D4289B147700DB4C5D /* Review */ = {
+			isa = PBXGroup;
+			children = (
+				D9E04C97281F120500B7251C /* ReviewView.swift */,
+				D993C8E928979363009A82E3 /* MasterButtonView.swift */,
+				D993C8EB289794A2009A82E3 /* ReviewButtonsView.swift */,
+			);
+			path = Review;
+			sourceTree = "<group>";
+		};
 		D996C642281E4C6600B82FD8 = {
 			isa = PBXGroup;
 			children = (
@@ -148,20 +200,11 @@
 		D996C673281E506A00B82FD8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				D996C674281E507600B82FD8 /* VocabListView.swift */,
-				D996C679281E694B00B82FD8 /* VocabItemView.swift */,
-				D9E04C97281F120500B7251C /* ReviewView.swift */,
-				D94CAF3F281F952D00205234 /* StateIcon.swift */,
-				D94CAF432820D7F900205234 /* StatsView.swift */,
-				D993C8E328978B07009A82E3 /* FlashCardObverseView.swift */,
-				D993C8E528978B16009A82E3 /* FlashCardReverseView.swift */,
-				D993C8E728978B50009A82E3 /* FlashCardView.swift */,
-				D993C8E928979363009A82E3 /* MasterButtonView.swift */,
-				D993C8EB289794A2009A82E3 /* ReviewButtonsView.swift */,
-				D993C8EF28979E5D009A82E3 /* FrameSpacer.swift */,
-				D993C8F32897BD7F009A82E3 /* EditItemView.swift */,
-				D993C8FB28983BB1009A82E3 /* NewItemView.swift */,
-				D993C90528986BF1009A82E3 /* SearchResults.swift */,
+				D95B01D4289B147700DB4C5D /* Review */,
+				D95B01D3289B146500DB4C5D /* Core */,
+				D95B01D2289B144100DB4C5D /* VocabList */,
+				D95B01D1289B142400DB4C5D /* FlashCard */,
+				D95B01D0289B141C00DB4C5D /* Form */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -257,6 +300,7 @@
 				D993C8FC28983BB1009A82E3 /* NewItemView.swift in Sources */,
 				D9E04C98281F120500B7251C /* ReviewView.swift in Sources */,
 				D996C65E281E4C6800B82FD8 /* Vocab_ToolDocument.swift in Sources */,
+				D95B01D6289B14A900DB4C5D /* MirroredTextField.swift in Sources */,
 				D94CAF40281F952D00205234 /* StateIcon.swift in Sources */,
 				D993C8E828978B50009A82E3 /* FlashCardView.swift in Sources */,
 				D996C678281E588200B82FD8 /* VocabListPreviewData.swift in Sources */,

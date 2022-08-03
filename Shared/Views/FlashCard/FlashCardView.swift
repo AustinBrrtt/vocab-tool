@@ -37,6 +37,7 @@ struct FlashCardView: View {
                     .transitionSuddenly(delay: animationTime / 2)
             }
         }
+        .padding(.horizontal, 9)
         .asCard(onBackgroundTap: flipCard)
         .rotation3DEffect(.degrees(rotation), axis: (x: 0, y: 1, z: 0))
     }
@@ -54,6 +55,6 @@ struct FlashCardView: View {
 
 struct FlashCardView_Previews: PreviewProvider {
     static var previews: some View {
-        FlashCardPickerPreview()
+        FlashCardPickerPreview(showReverse: true, startIndex: 8)
     }
 }

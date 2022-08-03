@@ -13,8 +13,7 @@ extension View {
     }
     
     func asCard(height: CGFloat = 500, onBackgroundTap: @escaping () -> Void = {}) -> some View {
-        padding(.horizontal, 5)
-            .frame(height: height)
+        frame(height: height)
             .background(
                 Rectangle()
                     .foregroundColor(Color.background.opacity(0.65))

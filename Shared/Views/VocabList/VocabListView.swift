@@ -87,6 +87,8 @@ struct VocabListView: View {
                 }
             }
         }
+        .navigationBarTitle("")
+        .navigationBarBackButtonHidden(cardShown)
     }
     
     func showCard(_ index: Int) -> Void {
@@ -100,10 +102,25 @@ struct VocabListView: View {
 }
 
 struct VocabListView_Previews: PreviewProvider {
+    struct PreviewView: View {
+        @State private var navOptions: [String] = ["f"]
+        @State private var navStack: [String] = ["f"]
+        
+        var body: some View {
+            NavigationStack(path: $navStack) {
+                List(navOptions, id: \.self) { f in
+                    NavigationLink(f, value: f)
+                }
+                .navigationDestination(for: String.self) { _ in
+                    VocabListView(vocabList: .constant(.sample))
+                }
+            }
+        }
+    }
     static var previews: some View {
         Group {
-            VocabListView(vocabList: .constant(.sample))
-            VocabListView(vocabList: .constant(.sample))
+            PreviewView()
+            PreviewView()
                 .preferredColorScheme(.dark)
         }
     }

@@ -14,7 +14,7 @@ struct EditItemView: View {
     
     var body: some View {
         Form {
-            TextField("Word", text: $item.word)
+            MirroredTextField("Word", text: $item.word)
             
             TextField("Pronunciation", text: $pronunciation)
                 .onAppear {
@@ -24,7 +24,7 @@ struct EditItemView: View {
                     item.pronunciation = newValue.isEmpty ? nil : newValue
                 }
             
-            TextField("Meaning", text: $item.meaning)
+            MirroredTextField("Meaning", text: $item.meaning)
             
             Picker("State", selection: $item.state) {
                 ForEach(VocabState.all, id: \.self) { state in

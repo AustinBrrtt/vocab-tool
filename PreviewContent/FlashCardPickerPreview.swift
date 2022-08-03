@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct FlashCardPickerPreview: View {
-    @State var index: Int = 0
+    @State var index: Int
     @State var rotation: Double
     
-    init(showReverse: Bool = false) {
+    init(showReverse: Bool = false, startIndex: Int = 0) {
         _rotation = State<Double>(initialValue: showReverse ? 180 : 0)
+        _index = State<Int>(initialValue: startIndex)
     }
     
     var body: some View {
