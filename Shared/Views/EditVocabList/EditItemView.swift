@@ -16,7 +16,7 @@ struct EditItemView: View {
         Form {
             MirroredTextField("Word", text: $item.word)
             
-            TextField("Pronunciation", text: $pronunciation)
+            MirroredTextField("Pronunciation", text: $pronunciation)
                 .onAppear {
                     pronunciation = item.pronunciation ?? ""
                 }

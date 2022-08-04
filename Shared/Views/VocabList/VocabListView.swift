@@ -11,17 +11,33 @@ struct VocabListView: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.editMode) var editMode
     @Binding var vocabList: VocabList
-    @State var shownCard: Int = 0
-    @State var cardShown: Bool = false
+    @Binding var toastMessage: String
+    @Binding var toastColor: Color
+    
+    @State var shownCard = 0
+    @State var cardShown = false
     @State var cardRotation: Double = 0
+    @State var searchText = ""
     
     var isEditMode: Bool {
         return editMode?.wrappedValue.isEditing ?? false
     }
     
+    var searchResults: [Int] {
+        if searchText.isEmpty {
+            return Array(vocabList.items.indices)
+        } else {
+            return vocabList.items.indices.filter { idx in
+                let item = vocabList.items[idx]
+                let searchSource = "\(item.word) \(item.pronunciation ?? "") \(item.meaning)".lowercased()
+                return searchSource.contains(searchText.lowercased())
+            }
+        }
+    }
+    
     var body: some View {
         ZStack {
-            List($vocabList.items.indices, id: \.self) { idx in
+            List(searchResults, id: \.self) { idx in
                 VocabItemView(vocabItem: $vocabList.items[idx], index: idx, showCard: showCard)
                     .padding(.horizontal)
                     .padding(.vertical, 5)
@@ -30,6 +46,7 @@ struct VocabListView: View {
                     .listRowSeparator(.hidden)
                     .listRowInsets(EdgeInsets(top: 10, leading: 20, bottom: (idx == vocabList.items.count - 1) ? 100 : 10, trailing: 20))
             }
+            .searchable(text: $searchText)
             .listStyle(.plain)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -47,7 +64,7 @@ struct VocabListView: View {
                 Spacer()
                 HStack {
                     Spacer()
-                    NavigationLink(destination: { NewItemView(vocabList: $vocabList) }) {
+                    NavigationLink(destination: { NewItemView(vocabList: $vocabList, toastMessage: $toastMessage, toastColor: $toastColor) }) {
                         Image(systemName: "plus.circle.fill")
                             .foregroundColor(.green.opacity(0.7))
                             .foregroundStyle(.ultraThinMaterial)
@@ -112,7 +129,7 @@ struct VocabListView_Previews: PreviewProvider {
                     NavigationLink(f, value: f)
                 }
                 .navigationDestination(for: String.self) { _ in
-                    VocabListView(vocabList: .constant(.sample))
+                    VocabListView(vocabList: .constant(.sample), toastMessage: .constant(""), toastColor: .constant(.green))
                 }
             }
         }

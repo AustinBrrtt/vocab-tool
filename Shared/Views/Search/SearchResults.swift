@@ -12,6 +12,8 @@ struct SearchResults: View {
     let wordQuery: String
     let pronunciationQuery: String
     let meaningQuery: String
+    let context: SearchContext
+    let onResultSelect: (VocabItem) -> Void
     
     var body: some View {
         List(vocabList.items.filter(filter)) { item in
@@ -23,18 +25,31 @@ struct SearchResults: View {
                         .fontWeight(.light)
                         .foregroundColor(.secondary)
                 }
-                Spacer()
+                Text("-")
                 Text(item.meaning)
+                
+                Spacer()
+                
+                if item.state == .untouched && context == .duplicateSearch {
+                    StateTransformationIcon(from: .untouched, to: .learning)
+                } else {
+                    StateIcon(state: item.state)
+                }
             }
-//                .padding(.horizontal)
-//                .padding(.vertical, 10)
-//                .background(Color.background)
-//                .cornerRadius(10)
-//                .padding()
-//                .listRowSeparator(.hidden)
-//                .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-//                .background(.regularMaterial)
-//                .edgesIgnoringSafeArea(.all)
+            .onTapGesture {
+                onResultSelect(item)
+            }
+            .opacity((context == .filter || item.state == .untouched) ? 1: 0.5)
+            .padding(.horizontal)
+            .padding(.vertical, 10)
+            .background(Color.background)
+            .cornerRadius(10)
+            .padding(.bottom)
+            .padding(.horizontal)
+            .background(.regularMaterial)
+            .listRowSeparator(.hidden)
+            .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+            .edgesIgnoringSafeArea(.all)
         }
         .scrollContentBackground(.hidden)
         .background(.regularMaterial)
@@ -63,6 +78,12 @@ struct SearchResults: View {
 
 struct SearchResults_Previews: PreviewProvider {
     static var previews: some View {
-        SearchResults(vocabList: .sample, wordQuery: "い", pronunciationQuery: "i", meaningQuery: "super")
+        SearchResults(vocabList: .sample, wordQuery: "い", pronunciationQuery: "i", meaningQuery: "super", context: .filter) { _ in }
+        SearchResults(vocabList: .sample, wordQuery: "い", pronunciationQuery: "i", meaningQuery: "super", context: .duplicateSearch) { _ in }
     }
+}
+
+enum SearchContext {
+    case duplicateSearch
+    case filter
 }

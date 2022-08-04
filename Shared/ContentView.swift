@@ -21,7 +21,7 @@ struct ContentView: View {
                     .toolbar {
                         ToolbarItem(placement: .navigationBarTrailing) {
                             NavigationLink("Vocab List") {
-                                VocabListView(vocabList: $document.vocabList)
+                                VocabListView(vocabList: $document.vocabList, toastMessage: $toastMessage, toastColor: $toastColor)
                             }
                         }
                     }

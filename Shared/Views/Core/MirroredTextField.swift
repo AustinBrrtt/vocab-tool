@@ -20,13 +20,21 @@ struct MirroredTextField: View {
     }
     
     var body: some View {
-        TextField(title, text: $mirror)
-            .onAppear {
-                mirror = source
+        HStack {
+            TextField(title, text: $mirror)
+                .onAppear {
+                    mirror = source
+                }
+                .onChange(of: mirror) { newValue in
+                    source = mirror
+                }
+            Button(action: {
+                mirror = ""
+            }) {
+                Image(systemName: "xmark.circle.fill")
+                    .foregroundColor(.secondary)
             }
-            .onChange(of: mirror) { newValue in
-                source = mirror
-            }
+        }
     }
 }
 
