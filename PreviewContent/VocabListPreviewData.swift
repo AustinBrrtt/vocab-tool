@@ -20,5 +20,5 @@ extension VocabList {
         VocabItem(word: "ドドドドドドドドドドド", pronunciation: "ゴゴゴゴゴゴゴゴゴゴゴゴゴゴゴ", meaning: "menacing,\nlike when Dio Brando looks at you like you're an ant", priority: 2546, lastBreak: 0, state: .learning, nextReviewDate: Date().add(-1, .day)),
         VocabItem(word: "ごみ", meaning: "trash", priority: 8, lastBreak: 0, state: .mastered),
         VocabItem(word: "自炊", pronunciation: "じすい", meaning: "cooking", priority: 9, lastBreak: 0, state: .mastered)
-    ], lastStudyDate: Date(), lastStudyDaySeenCards: [], lastStudyDayNewCardCount: 0, maxNewCardsPerDay: 10, maxReviewsPerDay: 40)
+    ], lastStudyDate: Date(), lastStudyDayReviewCount: 0, lastStudyDaySeenCards: [], lastStudyDayNewCardCount: 0, maxNewCardsPerDay: 10, maxReviewsPerDay: 40)
 }

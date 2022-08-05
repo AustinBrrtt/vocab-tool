@@ -19,6 +19,11 @@ struct VocabItem: Codable, Identifiable, Equatable {
     var state: VocabState
     var nextReviewDate: Date? // Note: Must be non-nil if state is .learning
     
+    var estimatedRemainingReviewCount: Int {
+        let minReviews = max(Config.reviewTimes.filter({ $0 > lastBreak && $0 <= 1440 /* 1d */  }).count, 1)
+        return minReviews + 1
+    }
+    
     enum CodingKeys: String, CodingKey {
         case word
         case pronunciation

@@ -15,29 +15,34 @@ struct FlashCardObverseView: View {
     
     var body: some View {
         VStack {
-            Spacer()
-            
-            Text(item.word)
-                .onTapGesture(perform: flipCard)
-                .font(.largeTitle)
-            
-            if let pronunciation = item.pronunciation {
-                Text(isCompletionPlaceholder || showPronunciation ? pronunciation : "Tap to reveal pronunciation")
-                    .multilineTextAlignment(.center)
-                    .foregroundColor(.secondary)
-                    .padding(8)
-                    .overlay(RoundedRectangle(cornerRadius: 5).stroke(Color.secondary))
-                    .padding(.bottom, 40)
-                    .padding(.top, 20)
-                    .padding(.horizontal, 40) // Make it easier to tap
-                    .background(Color.background.opacity(0.01))
-                    .padding(.top, -20)
-                    .onTapGesture {
-                        showPronunciation = !showPronunciation
-                    }
+            if item.state == .untouched {
+                VStack {
+                    Text("New!")
+                        .roundRectText(color: .blue)
+                        .frame(maxHeight: .infinity)
+                    Spacer()
+                }
+            } else {
+                FrameSpacer(.vertical)
             }
             
-            Spacer()
+            
+            VStack {
+                Text(item.word)
+                    .onTapGesture(perform: flipCard)
+                    .font(.largeTitle)
+                
+                if let pronunciation = item.pronunciation {
+                    Text(isCompletionPlaceholder || showPronunciation ? pronunciation : "Tap to reveal pronunciation")
+                        .roundRectText(color: .secondary)
+                        .onTapGesture {
+                            showPronunciation = !showPronunciation
+                        }
+                }
+            }
+            .frame(maxHeight: .infinity)
+            
+            FrameSpacer(.vertical)
         }
         .frame(maxWidth: .infinity)
     }
@@ -45,7 +50,7 @@ struct FlashCardObverseView: View {
 
 struct FlashCardObverseView_Previews: PreviewProvider {
     static var previews: some View {
-        FlashCardPickerPreview(showReverse: false)
+        FlashCardPickerPreview(showReverse: false, startIndex: 5)
         FlashCardView(rotation: .constant(0), item: VocabItem.placeholderItem, isCompletionPlaceholder: true)
     }
 }

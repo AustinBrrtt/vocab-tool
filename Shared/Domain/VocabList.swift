@@ -10,6 +10,7 @@ import Foundation
 struct VocabList: Codable {
     var items: [VocabItem]
     var lastStudyDate: Date
+    var lastStudyDayReviewCount: Int
     var lastStudyDaySeenCards: Set<Int>
     var lastStudyDayNewCardCount: Int
     var maxNewCardsPerDay: Int

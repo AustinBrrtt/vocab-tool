@@ -20,6 +20,7 @@ struct Vocab_ToolDocument: FileDocument {
     var reviewIndex = -1
     var currentCardIsNew = false
     var recentlySeen = Cache<Int>(size: 3)
+    var progress = 0.0
     
     var currentItem: VocabItem {
         hasItem
@@ -27,7 +28,7 @@ struct Vocab_ToolDocument: FileDocument {
         : VocabItem.placeholderItem
     }
 
-    init(list: VocabList = VocabList(items: [], lastStudyDate: Date(), lastStudyDaySeenCards: Set(), lastStudyDayNewCardCount: 0, maxNewCardsPerDay: 10, maxReviewsPerDay: 40)) { // TODO: Default Sample List for New Documents
+    init(list: VocabList = VocabList(items: [], lastStudyDate: Date(), lastStudyDayReviewCount: 0, lastStudyDaySeenCards: Set(), lastStudyDayNewCardCount: 0, maxNewCardsPerDay: 10, maxReviewsPerDay: 40)) { // TODO: Default Sample List for New Documents
         vocabList = list
         nextItem()
     }
@@ -73,6 +74,7 @@ extension Vocab_ToolDocument {
         
         // By doing this after updating the history, we ensure that the previous item counts towards the day it was selected on, even if we have passed midnight
         updateStudyDateToToday()
+        updateProgress()
         
         isBackupSpacerCard = false
         currentCardIsNew = false
@@ -169,7 +171,7 @@ extension Vocab_ToolDocument {
     private func firstReviewableItem(from items: [VocabItem]) -> (VocabItem, Bool)? {
         var acceptableItem: VocabItem? // Technically can be used, but was seen recently.
         for item in items {
-            if let nextReviewDate = item.nextReviewDate, isSameStudyDay(nextReviewDate) && (
+            if let nextReviewDate = item.nextReviewDate, isDateTodayOrSooner(nextReviewDate) && (
                 vocabList.lastStudyDaySeenCards.count < vocabList.maxTotalCardsPerDay ||
                 vocabList.lastStudyDaySeenCards.contains(vocabList.items.firstIndex(of: item) ?? -42)
             ) {
@@ -191,6 +193,7 @@ extension Vocab_ToolDocument {
     mutating private func updateHistory(_ index: Int, new: Bool) -> Void {
         recentlySeen.remember(index)
         vocabList.lastStudyDaySeenCards.insert(index)
+        vocabList.lastStudyDayReviewCount += 1
         if new {
             vocabList.lastStudyDayNewCardCount += 1
         }
@@ -202,6 +205,7 @@ extension Vocab_ToolDocument {
             vocabList.lastStudyDate = now
             vocabList.lastStudyDaySeenCards = []
             vocabList.lastStudyDayNewCardCount = 0
+            vocabList.lastStudyDayReviewCount = 0
         }
     }
     
@@ -218,6 +222,53 @@ extension Vocab_ToolDocument {
         
         // Only rhs has a nextReviewDate, or neither have a nextReviewDate
         return false
+    }
+    
+    private func isDateTodayOrSooner(_ date: Date) -> Bool {
+        return isSameStudyDay(date) || date < Date()
+    }
+    
+    mutating private func updateProgress() -> Void {
+        let lastSeen = Array(vocabList.lastStudyDaySeenCards)
+        let learningCards = vocabList.items.indices.filter({ vocabList.items[$0].state == .learning }).sorted(by: { a, b in sortByReviewDate(vocabList.items[a], vocabList.items[b]) })
+        let untouchedCards = vocabList.items.indices.filter({ vocabList.items[$0].state == .untouched })
+        
+        // First we must get all the cards that we might encounter today or have encountered today
+        // Start with the cards we've already seen
+        var reviewCards = lastSeen
+        // print("     seen: \(reviewCards.count) \(reviewCards)")
+        
+        // Next, if we're not done adding new cards, add the new cards we've yet to add for the day
+        if vocabList.lastStudyDaySeenCards.count < vocabList.maxNewCardsPerDay {
+            reviewCards.append(contentsOf: untouchedCards.prefix(vocabList.maxNewCardsPerDay - vocabList.lastStudyDaySeenCards.count))
+        }
+        // print("     addNewCards: \(reviewCards.count) \(reviewCards)")
+        
+        // Then add all the cards that might come up for review today if given the chance
+        reviewCards.append(contentsOf: learningCards.filter({ vocabList.items[$0].nextReviewDate == nil || isDateTodayOrSooner(vocabList.items[$0].nextReviewDate!) }).filter({ !vocabList.lastStudyDaySeenCards.contains($0) }))
+        // print("     totalPossible: \(reviewCards.count)")
+        
+        // Then cut off the list after we've hit the maximum number of cards if necessary
+        reviewCards = Array(reviewCards.prefix(vocabList.maxTotalCardsPerDay))
+        // print("     limitedReviewCards: \(reviewCards.count) \(reviewCards)")
+        
+        // Now we want to filter out any cards that we're done studying for the day
+        let inProgressCards = reviewCards.filter({ vocabList.items[$0].nextReviewDate == nil || isDateTodayOrSooner(vocabList.items[$0].nextReviewDate!) })
+        // print("     inProgress: \(inProgressCards.count) \(inProgressCards)")
+        
+        // We get our final estimate by starting with the number of reviews we've already done today and running our heuristic for remaining reviews on each card that we're not done with yet
+        var estimatedTotalReviews = vocabList.lastStudyDayReviewCount
+        for idx in inProgressCards {
+            estimatedTotalReviews += vocabList.items[idx].estimatedRemainingReviewCount
+        }
+        // print("     estimate: \(estimatedTotalReviews)")
+        
+        // Then we devide the number so far by the estimate to estimate the progress. Note that we don't allow the estimated reviews to be below 1 to avoid a divide by zero scenario.
+        let rawProgress = Double(vocabList.lastStudyDayReviewCount) / max(Double(estimatedTotalReviews), 1.0)
+        // print(" progress: \(vocabList.lastStudyDayReviewCount) / \(estimatedTotalReviews) = \(progress)")
+        
+        // Finally, since the estimates tend to be much higher in the beginning, we adjust for this by adjusting it so the progress moves faster when it is lower
+        progress = sqrt(rawProgress)
     }
 }
 

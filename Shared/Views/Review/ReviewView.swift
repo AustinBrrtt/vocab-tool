@@ -22,6 +22,10 @@ struct ReviewView: View {
     
     var body: some View {
         VStack {
+            ProgressView(value: document.progress, total: 1)
+                .accessibility(label: Text("Daily Practice"))
+                .padding()
+            
             HStack {
                 if cardRotation == 180 {
                     MasterButtonView(master: master)

@@ -41,4 +41,13 @@ extension View {
             return AnyView(EmptyView())
         }
     }
+    
+    func roundRectText(color: Color = .primary) -> some View {
+        multilineTextAlignment(.center)
+            .foregroundColor(color)
+            .padding(8)
+            .overlay(RoundedRectangle(cornerRadius: 5).stroke(color))
+            .padding(.horizontal, 40) // Make it easier to tap
+            .background(Color.background.opacity(0.01))
+    }
 }
