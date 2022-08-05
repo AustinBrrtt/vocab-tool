@@ -236,39 +236,40 @@ extension Vocab_ToolDocument {
         // First we must get all the cards that we might encounter today or have encountered today
         // Start with the cards we've already seen
         var reviewCards = lastSeen
-        // print("     seen: \(reviewCards.count) \(reviewCards)")
+        // print("    seen: \(reviewCards.count) \(reviewCards)")
         
         // Next, if we're not done adding new cards, add the new cards we've yet to add for the day
         if vocabList.lastStudyDaySeenCards.count < vocabList.maxNewCardsPerDay {
             reviewCards.append(contentsOf: untouchedCards.prefix(vocabList.maxNewCardsPerDay - vocabList.lastStudyDaySeenCards.count))
         }
-        // print("     addNewCards: \(reviewCards.count) \(reviewCards)")
+        // print("    addNewCards: \(reviewCards.count) \(reviewCards)")
         
         // Then add all the cards that might come up for review today if given the chance
         reviewCards.append(contentsOf: learningCards.filter({ vocabList.items[$0].nextReviewDate == nil || isDateTodayOrSooner(vocabList.items[$0].nextReviewDate!) }).filter({ !vocabList.lastStudyDaySeenCards.contains($0) }))
-        // print("     totalPossible: \(reviewCards.count)")
+        // print("    totalPossible: \(reviewCards.count)")
         
         // Then cut off the list after we've hit the maximum number of cards if necessary
         reviewCards = Array(reviewCards.prefix(vocabList.maxTotalCardsPerDay))
-        // print("     limitedReviewCards: \(reviewCards.count) \(reviewCards)")
+        // print("    limitedReviewCards: \(reviewCards.count) \(reviewCards)")
         
         // Now we want to filter out any cards that we're done studying for the day
         let inProgressCards = reviewCards.filter({ vocabList.items[$0].nextReviewDate == nil || isDateTodayOrSooner(vocabList.items[$0].nextReviewDate!) })
-        // print("     inProgress: \(inProgressCards.count) \(inProgressCards)")
+        // print("    inProgress: \(inProgressCards.count) \(inProgressCards)")
         
         // We get our final estimate by starting with the number of reviews we've already done today and running our heuristic for remaining reviews on each card that we're not done with yet
         var estimatedTotalReviews = vocabList.lastStudyDayReviewCount
         for idx in inProgressCards {
             estimatedTotalReviews += vocabList.items[idx].estimatedRemainingReviewCount
         }
-        // print("     estimate: \(estimatedTotalReviews)")
+        // print("    estimate: \(estimatedTotalReviews)")
         
         // Then we devide the number so far by the estimate to estimate the progress. Note that we don't allow the estimated reviews to be below 1 to avoid a divide by zero scenario.
         let rawProgress = Double(vocabList.lastStudyDayReviewCount) / max(Double(estimatedTotalReviews), 1.0)
-        // print(" progress: \(vocabList.lastStudyDayReviewCount) / \(estimatedTotalReviews) = \(progress)")
+        // print("    progress: \(vocabList.lastStudyDayReviewCount) / \(estimatedTotalReviews) = \(rawProgress)")
         
         // Finally, since the estimates tend to be much higher in the beginning, we adjust for this by adjusting it so the progress moves faster when it is lower
         progress = sqrt(rawProgress)
+        // print("adjusted: \(progress)")
     }
 }
 
