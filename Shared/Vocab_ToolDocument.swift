@@ -122,6 +122,7 @@ extension Vocab_ToolDocument {
         
         // Otherwise, there is nothing to select, so just set the index to -1
         reviewIndex = -1
+        progress = 1
     }
     
     mutating func masterItem() -> Void {
@@ -228,6 +229,7 @@ extension Vocab_ToolDocument {
         return isSameStudyDay(date) || date < Date()
     }
     
+    // TODO: progress is also set to 1 at the end of nextItem(), can that edge case be handled here even though reviewIndex isn't updated until after this call?
     mutating private func updateProgress() -> Void {
         let lastSeen = Array(vocabList.lastStudyDaySeenCards)
         let learningCards = vocabList.items.indices.filter({ vocabList.items[$0].state == .learning }).sorted(by: { a, b in sortByReviewDate(vocabList.items[a], vocabList.items[b]) })
